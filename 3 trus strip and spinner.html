@@ -1,0 +1,763 @@
+<!-- Moonhollow Apothecary: Trust strip + Halloween spin section -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Spectral:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+<style>
+    .mh-trust,
+    .mh-spin {
+        --mh-night: #14091f;
+        --mh-plum: #241338;
+        --mh-deep: #0b0414;
+        --mh-orange: #ff7a1a;
+        --mh-lime: #9be564;
+        --mh-bone: #f1e8d6;
+        --mh-mist: #b9a9d1;
+        --mh-line: #4a2c6e;
+        box-sizing: border-box;
+        width: 100%;
+        font-family: Spectral, Georgia, serif;
+        line-height: 1.6
+    }
+
+    .mh-trust *,
+    .mh-trust *::before,
+    .mh-trust *::after,
+    .mh-spin *,
+    .mh-spin *::before,
+    .mh-spin *::after {
+        box-sizing: border-box
+    }
+
+    .mh-trust {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: var(--mh-plum);
+        padding: 30px 0 52px;
+        color: var(--mh-bone)
+    }
+
+    .mh-trust::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 0%, rgba(155, 229, 100, .08), transparent 58%)
+    }
+
+    .mh-trust-wrap {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        padding: 0 22px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px
+    }
+
+    .mh-trust-item {
+        min-width: 0;
+        min-height: 132px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 18px 14px;
+        border: 1px solid rgba(185, 169, 209, .18);
+        border-radius: 18px;
+        background: rgba(20, 9, 31, .4);
+        box-shadow: 0 12px 30px rgba(8, 3, 14, .12);
+        transition: transform .2s ease, border-color .2s ease, background .2s ease
+    }
+
+    .mh-trust-item:hover {
+        transform: translateY(-4px);
+        border-color: rgba(155, 229, 100, .5);
+        background: rgba(20, 9, 31, .66)
+    }
+
+    .mh-trust-icon {
+        width: 34px;
+        height: 34px;
+        margin-bottom: 9px;
+        color: var(--mh-orange)
+    }
+
+    .mh-trust-item b {
+        display: block;
+        color: var(--mh-lime);
+        font: 400 22px/1.2 'Pirata One', Georgia, serif;
+        letter-spacing: .02em
+    }
+
+    .mh-trust-item span {
+        display: block;
+        margin-top: 4px;
+        color: var(--mh-mist);
+        font-size: 14px;
+        line-height: 1.4
+    }
+
+    .mh-spin {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        padding: 70px 22px;
+        color: var(--mh-bone);
+        background: radial-gradient(ellipse at 12% 15%, rgba(84, 39, 105, .68), transparent 42%), linear-gradient(135deg, var(--mh-night), #20112e 60%, #2b1739)
+    }
+
+    .mh-spin::after {
+        content: "✦";
+        position: absolute;
+        z-index: -1;
+        right: 4%;
+        bottom: -90px;
+        color: rgba(255, 122, 26, .08);
+        font: 220px/1 Georgia, serif;
+        pointer-events: none
+    }
+
+    .mh-spin-wrap {
+        width: min(1280px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+        align-items: center;
+        gap: 30px
+    }
+
+    .mh-spin-copy .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--mh-lime);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .16em;
+        text-transform: uppercase
+    }
+
+    .mh-spin-copy .eyebrow::before {
+        content: "";
+        width: 20px;
+        height: 1px;
+        background: var(--mh-orange)
+    }
+
+    .mh-spin-copy h2 {
+        margin: 12px 0 14px;
+        color: var(--mh-orange);
+        font: 400 clamp(42px, 5.5vw, 66px)/.98 'Pirata One', Georgia, serif;
+        text-shadow: 0 3px 0 rgba(72, 29, 11, .65)
+    }
+
+    .mh-spin-copy p {
+        max-width: 430px;
+        margin: 0;
+        color: #e3d8e9;
+        font-size: 17px
+    }
+
+    .mh-spin-perks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 22px 0 0;
+        padding: 0;
+        list-style: none
+    }
+
+    .mh-spin-perks li {
+        padding: 6px 11px;
+        border: 1px solid rgba(185, 169, 209, .24);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .045);
+        color: var(--mh-bone);
+        font-size: 13px
+    }
+
+    .mh-spin-perks li::before {
+        content: "✦";
+        margin-right: 7px;
+        color: var(--mh-orange)
+    }
+
+    .mh-spin-panel {
+        min-width: 0;
+        padding: 18px;
+        border: 1px solid rgba(185, 169, 209, .2);
+        border-radius: 24px;
+        background: rgba(11, 4, 20, .68);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, .28)
+    }
+
+    .mh-spin-panel-title {
+        margin: 0 0 12px;
+        text-align: center;
+        color: var(--mh-lime);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .14em;
+        text-transform: uppercase
+    }
+
+    /* Match the plugin wheel and form to the Moonhollow palette. */
+    .mh-spin .spin-win-inline-mount {
+        min-width: 0;
+        width: 100%
+    }
+
+    .mh-spin .spin-win-inline-modal {
+        display: grid;
+        grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+        min-height: 0;
+        height: auto;
+        border: 1px solid rgba(185, 169, 209, .16);
+        border-radius: 18px;
+        background: var(--mh-deep);
+        overflow: hidden
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-wheel-column {
+        flex: none;
+        width: auto;
+        min-width: 0;
+        min-height: 0;
+        padding: 20px 12px;
+        border-radius: 0;
+        background: radial-gradient(circle at 50% 42%, #492453 0, #241338 56%, #100818 100%)
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-form-column {
+        min-width: 0;
+        padding: 30px 26px;
+        border-radius: 0;
+        background: linear-gradient(145deg, #f6efdf, #ece0ca)
+    }
+
+    .mh-spin .spin-win-tag-badge {
+        background: #e4efcf;
+        color: #36531b;
+        letter-spacing: .04em
+    }
+
+    .mh-spin .spin-win-title {
+        font-family: 'Pirata One', Georgia, serif;
+        font-size: clamp(23px, 2.5vw, 31px);
+        font-weight: 400;
+        color: #241338
+    }
+
+    .mh-spin .spin-win-desc {
+        font: 14px/1.55 Spectral, Georgia, serif;
+        color: #685b70
+    }
+
+    .mh-spin .spin-win-field label {
+        font: 600 13px Spectral, Georgia, serif;
+        color: #35283c
+    }
+
+    .mh-spin .spin-win-field input[type="text"],
+    .mh-spin .spin-win-field input[type="email"],
+    .mh-spin .spin-win-field input[type="number"] {
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid #d5c7d8;
+        border-radius: 10px;
+        background: #fffdf8;
+        color: #241338;
+        font: 15px Spectral, Georgia, serif
+    }
+
+    .mh-spin .spin-win-field input:focus {
+        border-color: #795099;
+        box-shadow: 0 0 0 3px rgba(121, 80, 153, .16)
+    }
+
+    .mh-spin .spin-win-consent-row label {
+        align-items: flex-start;
+        line-height: 1.45;
+        color: #685b70
+    }
+
+    .mh-spin .spin-win-btn-primary {
+        min-height: 48px;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(110deg, #ff8a26, #ff6d1b);
+        box-shadow: 0 8px 18px rgba(255, 122, 26, .24);
+        color: #241338;
+        font: 700 14px Spectral, Georgia, serif;
+        transition: transform .18s ease, box-shadow .18s ease
+    }
+
+    .mh-spin .spin-win-btn-primary:hover {
+        transform: translateY(-2px);
+        background: linear-gradient(110deg, #ffa044, #ff7a1a);
+        box-shadow: 0 10px 22px rgba(255, 122, 26, .32)
+    }
+
+    .mh-spin .spin-win-coupon-box {
+        border-color: #9a7ab0;
+        background: #f8f2e7
+    }
+
+    .mh-spin .spin-win-coupon-code {
+        color: #432654
+    }
+
+    .mh-spin .spin-win-btn-copy {
+        color: #432654;
+        border-color: #c9b7d1
+    }
+
+    .mh-spin .spin-win-btn-copy:hover {
+        background: #efe5d4
+    }
+
+    @media(max-width:820px) {
+        .mh-trust-wrap {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .mh-spin {
+            padding: 56px 18px;
+        }
+
+        .mh-spin-wrap {
+            grid-template-columns: 1fr;
+            gap: 26px;
+        }
+
+        .mh-spin-copy p {
+            max-width: 620px;
+        }
+
+        .mh-spin .spin-win-inline-modal {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .mh-spin .spin-win-inline-modal .spin-win-wheel-column {
+            min-height: 0;
+            padding: 22px 12px 14px;
+        }
+
+        .mh-spin .spin-win-inline-modal #spin-win-canvas {
+            width: min(68vw, 250px);
+        }
+
+        .mh-spin .spin-win-inline-modal .spin-win-form-column {
+            padding: 20px;
+        }
+    }
+
+    @media(max-width:520px) {
+        .mh-trust {
+            padding: 20px 0 34px;
+        }
+
+        .mh-trust-wrap {
+            padding: 0 14px;
+            gap: 10px;
+        }
+
+        .mh-trust-item {
+            min-height: 118px;
+            padding: 13px 8px;
+            border-radius: 15px;
+        }
+
+        .mh-trust-icon {
+            width: 29px;
+            height: 29px;
+            margin-bottom: 7px;
+        }
+
+        .mh-trust-item b {
+            font-size: 19px;
+        }
+
+        .mh-trust-item span {
+            font-size: 12px;
+        }
+
+        .mh-spin {
+            padding: 46px 14px;
+        }
+
+        .mh-spin-copy h2 {
+            font-size: 44px;
+        }
+
+        .mh-spin-copy p {
+            font-size: 15px;
+        }
+
+        .mh-spin-perks {
+            gap: 6px;
+        }
+
+        .mh-spin-perks li {
+            font-size: 12px;
+            padding: 5px 9px;
+        }
+
+        .mh-spin-panel {
+            padding: 10px;
+            border-radius: 19px;
+        }
+
+        .mh-spin .spin-win-inline-modal .spin-win-wheel-column {
+            min-height: 0;
+            padding: 22px 12px 14px;
+        }
+
+        .mh-spin .spin-win-inline-modal #spin-win-canvas {
+            width: min(68vw, 250px);
+        }
+
+        .mh-spin .spin-win-inline-modal .spin-win-form-column {
+            padding: 17px 15px;
+        }
+
+        .mh-spin .spin-win-title {
+            font-size: 25px;
+        }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+        .mh-trust-item,
+        .mh-spin .spin-win-btn-primary {
+            transition: none;
+        }
+    }
+
+    /* Give the wheel the visual priority and keep the details compact. */
+    .mh-spin .spin-win-inline-modal {
+        grid-template-columns: minmax(0, 1.2fr) minmax(250px, .8fr);
+    }
+
+    .mh-spin .spin-win-inline-modal #spin-win-canvas {
+        width: min(100%, 460px) !important;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-wheel-column {
+        padding: 22px 12px;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-form-column {
+        padding: 20px 18px;
+        background: linear-gradient(150deg, #2b1739, #1b1028) !important;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-title {
+        color: #ff9a43 !important;
+        font-size: 25px !important;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-desc {
+        color: #d9cbe2;
+        font-size: 12px;
+        line-height: 1.45;
+        margin-bottom: 10px;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-field label {
+        color: #f1e8d6;
+        font-size: 12px;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-field {
+        margin-bottom: 8px;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-field input[type="text"],
+    .mh-spin .spin-win-inline-modal .spin-win-field input[type="email"],
+    .mh-spin .spin-win-inline-modal .spin-win-field input[type="number"] {
+        min-height: 40px;
+        padding: 7px 10px;
+        border-color: #604675;
+        background: #14091f;
+        color: #f1e8d6;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-consent-row label {
+        color: #cbbbd7;
+        font-size: 10px;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-tag-badge {
+        background: rgba(155, 229, 100, .14);
+        color: #b8ed82;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-coupon-box {
+        background: #14091f;
+        border-color: #9a7ab0;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-coupon-code {
+        color: #b8ed82;
+    }
+
+    .mh-spin .spin-win-inline-modal .spin-win-btn-copy {
+        background: #2b1739;
+        border-color: #604675;
+        color: #f1e8d6;
+    }
+
+    @media(max-width:820px) {
+        .mh-spin .spin-win-inline-modal {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .mh-spin .spin-win-inline-modal #spin-win-canvas {
+            width: min(88vw, 400px) !important;
+        }
+
+        .mh-spin .spin-win-inline-modal .spin-win-wheel-column {
+            padding: 20px 12px 14px;
+        }
+
+        .mh-spin .spin-win-inline-modal .spin-win-form-column {
+            padding: 18px 20px;
+        }
+    }
+
+    @media(max-width:520px) {
+        .mh-spin .spin-win-inline-modal #spin-win-canvas {
+            width: min(88vw, 320px) !important;
+        }
+
+        .mh-spin .spin-win-inline-modal .spin-win-form-column {
+            padding: 16px 15px;
+        }
+    }
+
+    .mh-witch-art {
+        width: min(100%, 300px);
+        margin: 0 auto 18px 0;
+    }
+
+    .mh-witch-art svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        filter: drop-shadow(0 14px 24px rgba(5, 2, 10, .28));
+        animation: mh-witch-float 5s ease-in-out infinite;
+    }
+
+    @keyframes mh-witch-float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
+    }
+
+    @media(max-width:820px) {
+        .mh-witch-art {
+            width: min(100%, 320px);
+            margin: 0 auto 18px;
+        }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+        .mh-witch-art svg {
+            animation: none;
+        }
+    }
+
+    .mh-witch-art.mh-witch-pending {
+        opacity: 0;
+        transform: translate3d(-76px, 22px, 0) rotate(-7deg) scale(.94);
+    }
+
+    .mh-witch-art.mh-witch-pending.is-visible {
+        animation: mh-witch-arrive 1.15s cubic-bezier(.2, .75, .25, 1) both;
+    }
+
+    @keyframes mh-witch-arrive {
+        0% {
+            opacity: 0;
+            transform: translate3d(-76px, 22px, 0) rotate(-7deg) scale(.94);
+        }
+
+        70% {
+            opacity: 1;
+            transform: translate3d(8px, -3px, 0) rotate(1deg) scale(1.015);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotate(0) scale(1);
+        }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+        .mh-witch-art.mh-witch-pending,
+        .mh-witch-art.mh-witch-pending.is-visible {
+            opacity: 1;
+            transform: none;
+            animation: none;
+        }
+    }
+</style>
+
+<section class="mh-trust" aria-label="Shopping benefits">
+    <div class="mh-trust-wrap">
+        <div class="mh-trust-item">
+            <svg class="mh-trust-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <path d="M4 12h20v17H4zM24 18h7l6 6v5H24z" stroke="currentColor" stroke-width="2"
+                    stroke-linejoin="round" />
+                <circle cx="12" cy="31" r="3" stroke="currentColor" stroke-width="2" />
+                <circle cx="30" cy="31" r="3" stroke="currentColor" stroke-width="2" />
+                <path d="M8 17h9M8 21h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <b>Free shipping</b><span>Every Order</span>
+        </div>
+        <div class="mh-trust-item">
+            <svg class="mh-trust-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <path d="M20 4 32 9v9c0 8-5.2 14.2-12 18-6.8-3.8-12-10-12-18V9l12-5Z" stroke="currentColor"
+                    stroke-width="2" stroke-linejoin="round" />
+                <path d="m14 19 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <b>7-Day Return</b><span>Easy Returns</span>
+        </div>
+        <div class="mh-trust-item">
+            <svg class="mh-trust-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <path d="m20 4 15 8v16l-15 8-15-8V12l15-8Z" stroke="currentColor" stroke-width="2"
+                    stroke-linejoin="round" />
+                <path d="m5 12 15 9 15-9M20 21v15M13 8l15 9" stroke="currentColor" stroke-width="2"
+                    stroke-linejoin="round" />
+            </svg>
+            <b>Plain packaging</b><span>Private and discreet</span>
+        </div>
+        <div class="mh-trust-item">
+            <svg class="mh-trust-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <path d="M8 12h24v22H8zM13 12V8a7 7 0 0 1 14 0v4" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="m16 23 3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <b>Secure Payments
+            </b><span>Zelle, Venmo, Cash App & BTC</span>
+        </div>
+    </div>
+</section>
+
+<section class="mh-spin" aria-labelledby="mh-spin-title">
+    <div class="mh-spin-wrap">
+        <div class="mh-spin-copy">
+            <div class="mh-witch-art" role="img"
+                aria-label="A friendly Halloween witch carrying a basket of pumpkin treats">
+                <svg viewBox="0 0 320 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <radialGradient id="mh-moon-glow">
+                            <stop stop-color="#fff4d6" />
+                            <stop offset=".68" stop-color="#f3d58f" />
+                            <stop offset="1" stop-color="#c6924d" />
+                        </radialGradient>
+                        <linearGradient id="mh-cloak" x1="70" y1="110" x2="150" y2="225" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#713f91" />
+                            <stop offset="1" stop-color="#301845" />
+                        </linearGradient>
+                        <linearGradient id="mh-basket" x1="160" y1="175" x2="250" y2="222"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#bd6b2c" />
+                            <stop offset="1" stop-color="#713918" />
+                        </linearGradient>
+                        <filter id="mh-moon-blur" x="100" y="0" width="230" height="220"
+                            color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+                            <feGaussianBlur stdDeviation="15" />
+                        </filter>
+                    </defs>
+                    <circle cx="218" cy="94" r="70" fill="#ffbb58" opacity=".22" filter="url(#mh-moon-blur)" />
+                    <circle cx="218" cy="94" r="55" fill="url(#mh-moon-glow)" opacity=".96" />
+                    <path
+                        d="m187 70 3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8Zm72-29 2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6Zm-10 91 2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z"
+                        fill="#fff0c4" />
+                    <path d="M48 220 274 64" stroke="#9e6a3e" stroke-width="5" stroke-linecap="round" />
+                    <path d="m45 216 8 20m-1-24 9 20m-2-25 10 19m-4-26 11 19" stroke="#d5a05a" stroke-width="3"
+                        stroke-linecap="round" />
+                    <path d="M89 110c-20 10-29 36-34 67l-9 41c23 15 72 15 105-1-13-25-15-62-22-92-10-12-24-19-40-15Z"
+                        fill="url(#mh-cloak)" stroke="#9b70b8" stroke-width="2" />
+                    <path d="M81 131c-15 16-20 35-24 54l35 8 12-40" fill="#38204f" />
+                    <path d="M123 127c16 15 24 29 36 44l20-5c-5-17-17-37-34-50" fill="#4c2a68" stroke="#9b70b8"
+                        stroke-width="2" stroke-linejoin="round" />
+                    <path d="m171 167 13 8" stroke="#d9a27f" stroke-width="8" stroke-linecap="round" />
+                    <path d="M91 56 112 8l43 58c-19-7-42-8-64-2Z" fill="#2a163d" stroke="#9b70b8" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <path d="M100 49c12 2 25 5 38 11l6 9c-17-5-34-6-51-3Z" fill="#ff7a1a" />
+                    <path d="M77 66c20-11 56-8 77 6 5 3 4 8-2 10-25 8-60 7-79-3-5-3-3-9 4-13Z" fill="#321b47"
+                        stroke="#a77ac1" stroke-width="2" />
+                    <path d="M91 69c-3 17 7 35 22 37 16 1 27-15 24-31-12-8-31-10-46-6Z" fill="#d6a17f" />
+                    <path d="M89 72c7-10 19-14 32-11 9 2 15 8 18 16-10-5-17-6-25-4-9 2-15 7-22 14-5-3-7-9-3-15Z"
+                        fill="#26152f" />
+                    <path d="M103 87h1m20-2h1" stroke="#2b1739" stroke-width="3" stroke-linecap="round" />
+                    <path d="M110 96c4 3 9 3 13 0" stroke="#8b4d50" stroke-width="2" stroke-linecap="round" />
+                    <path d="M166 171c4-16 18-25 36-25 18 0 33 9 37 25" fill="none" stroke="#e6b66e" stroke-width="4" />
+                    <path d="m158 169 91 0-10 51c-18 11-53 11-71 0l-10-51Z" fill="url(#mh-basket)" stroke="#e6b66e"
+                        stroke-width="3" stroke-linejoin="round" />
+                    <path d="M164 181h78m-74 12h70m-66 12h62" stroke="#e6b66e" stroke-width="2" opacity=".75" />
+                    <g transform="translate(176 157)">
+                        <path d="M18 13c-1-7 2-11 7-13 1 5 0 9-4 13" fill="#85a34d" />
+                        <path d="M5 17c0-8 7-14 15-13 9-1 16 5 16 13 0 9-7 15-16 15S5 26 5 17Z" fill="#f07820" />
+                        <path d="M13 6c-5 9-5 18 0 25m13-25c5 9 5 18 0 25" fill="none" stroke="#ffad49" stroke-width="3"
+                            stroke-linecap="round" />
+                    </g>
+                    <g transform="translate(205 159) scale(.82)">
+                        <path d="M18 13c-1-7 2-11 7-13 1 5 0 9-4 13" fill="#85a34d" />
+                        <path d="M5 17c0-8 7-14 15-13 9-1 16 5 16 13 0 9-7 15-16 15S5 26 5 17Z" fill="#ff8b27" />
+                        <path d="M13 6c-5 9-5 18 0 25m13-25c5 9 5 18 0 25" fill="none" stroke="#ffc05e" stroke-width="3"
+                            stroke-linecap="round" />
+                    </g>
+                    <path d="M65 103c-5 4-8 9-8 14m3 1 6-2m-9 8 6-1" stroke="#9be564" stroke-width="2"
+                        stroke-linecap="round" />
+                    <circle cx="74" cy="188" r="3" fill="#ffb74b" />
+                    <circle cx="266" cy="153" r="2.5" fill="#9be564" />
+                </svg>
+            </div>
+            <span class="eyebrow">A little treat for spooky season</span>
+            <h2 id="mh-spin-title">Trick or Treat?</h2>
+            <p>Give the wheel a spin and uncover a Halloween surprise! You might find up to $120 off, free shipping, or an extra treat for your next order.</p>
+            <ul class="mh-spin-perks">
+                <li>Spooky good deals</li>
+                <li>Witchy surprises</li>
+                <li>One lucky spin</li>
+            </ul>
+        </div>
+        <div class="mh-spin-panel">
+            <p class="mh-spin-panel-title">Your Halloween reward awaits</p>
+            <div class="spin-win-inline-mount" data-spin-win-inline="1" aria-live="polite"></div>
+        </div>
+    </div>
+</section>
+<script>
+    (function () {
+        var art = document.querySelector('.mh-witch-art');
+        if (!art) return;
+        art.classList.add('mh-witch-pending');
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { art.classList.add('is-visible'); return; }
+        if (!('IntersectionObserver' in window)) { art.classList.add('is-visible'); return; }
+        var observer = new IntersectionObserver(function (entries) {
+            if (entries.some(function (entry) { return entry.isIntersecting; })) {
+                art.classList.add('is-visible');
+                observer.disconnect();
+            }
+        }, { threshold: .15 });
+        observer.observe(art);
+    })();
+</script>

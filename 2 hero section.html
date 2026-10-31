@@ -1,0 +1,1269 @@
+<!-- ==========================================================
+ MOONHOLLOW APOTHECARY — RESPONSIVE HALLOWEEN HERO
+ Elementor HTML Widget
+ Product section ID: shelf
+ Halloween deals section ID: sale
+ Animated wind + layered mist, no leaves
+========================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Spectral:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+<style>
+    /* ==========================================================
+   1. EASY WIND / MIST CONTROLS
+   Adjust these values to change the wind animation.
+========================================================== */
+    #mhHero {
+        --mh-wind-speed: 10s;
+        --mh-mist-speed: 16s;
+        --mh-air-speed: 13s;
+
+        --mh-night: #100719;
+        --mh-purple: #241137;
+        --mh-bone: #f5ead5;
+        --mh-mist: #c7b8d5;
+        --mh-orange: #ff8128;
+    }
+
+    /* 2. HERO BASE */
+    #mhHero,
+    #mhHero *,
+    #mhHero *::before,
+    #mhHero *::after {
+        box-sizing: border-box;
+    }
+
+    #mhHero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        width: 100%;
+        min-height: 760px;
+        padding: 55px 24px 190px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+        color: var(--mh-bone);
+        font-family: "Spectral", Georgia, serif;
+        line-height: 1.7;
+
+        background:
+            radial-gradient(ellipse at 50% 20%, rgba(99, 48, 143, .42), transparent 52%),
+            linear-gradient(180deg, #100719 0%, #1b0c2b 48%, #29143c 100%);
+    }
+
+    #mhHero a {
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 3. STARRY SKY */
+    #mhHero .mh-sky {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+
+        background-image:
+            radial-gradient(2px 2px at 8% 15%, #fff8dc 99%, transparent),
+            radial-gradient(1px 1px at 18% 42%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 29% 12%, #d9caff 99%, transparent),
+            radial-gradient(1px 1px at 40% 31%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 52% 8%, #fff8dc 99%, transparent),
+            radial-gradient(1px 1px at 64% 26%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 77% 17%, #d9caff 99%, transparent),
+            radial-gradient(1px 1px at 88% 35%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 95% 10%, #fff8dc 99%, transparent),
+            radial-gradient(1px 1px at 13% 63%, #fff 99%, transparent),
+            radial-gradient(2px 2px at 33% 54%, #d9caff 99%, transparent),
+            radial-gradient(1px 1px at 72% 58%, #fff 99%, transparent);
+
+        opacity: .85;
+    }
+
+    #mhHero .mh-star {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #fff5d9;
+        box-shadow: 0 0 10px 2px rgba(255, 238, 188, .4);
+        animation: mhTwinkle 4s ease-in-out infinite alternate;
+    }
+
+    #mhHero .mh-star.s1 {
+        left: 12%;
+        top: 25%;
+        animation-delay: 1s;
+    }
+
+    #mhHero .mh-star.s2 {
+        right: 15%;
+        top: 14%;
+        animation-delay: 2s;
+    }
+
+    #mhHero .mh-star.s3 {
+        left: 22%;
+        top: 53%;
+        animation-delay: .5s;
+    }
+
+    #mhHero .mh-star.s4 {
+        right: 25%;
+        top: 48%;
+        animation-delay: 1.5s;
+    }
+
+    /* 4. MOON */
+    #mhHero .mh-moon-wrap {
+        position: relative;
+        z-index: 2;
+        width: min(270px, 65vw);
+        aspect-ratio: 1;
+        margin: 0 auto 30px;
+        flex-shrink: 0;
+        animation: mhMoonRise 2s ease-out both;
+    }
+
+    #mhHero .mh-moon {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        overflow: hidden;
+
+        background:
+            radial-gradient(circle at 30% 28%, rgba(255, 255, 230, .95) 0%, transparent 24%),
+            radial-gradient(circle at 35% 35%, #fff5d8 0%, #f5dfa9 35%, #dfbd78 68%, #9b7545 100%);
+
+        box-shadow:
+            0 0 35px 8px rgba(255, 211, 133, .12),
+            0 0 100px 25px rgba(255, 180, 80, .15),
+            inset -22px -12px 38px rgba(70, 40, 22, .35),
+            inset 10px 8px 25px rgba(255, 255, 230, .45);
+    }
+
+    #mhHero .mh-crater {
+        position: absolute;
+        border-radius: 50%;
+        background:
+            radial-gradient(circle at 32% 30%, rgba(255, 249, 220, .8),
+                rgba(170, 133, 76, .22) 40%, rgba(125, 92, 48, .18) 72%,
+                rgba(255, 240, 194, .35) 100%);
+        box-shadow:
+            inset 2px 3px 5px rgba(123, 91, 44, .18),
+            1px 1px 3px rgba(255, 248, 221, .25);
+    }
+
+    #mhHero .mh-crater.c1 {
+        width: 24%;
+        height: 24%;
+        top: 20%;
+        left: 18%;
+    }
+
+    #mhHero .mh-crater.c2 {
+        width: 13%;
+        height: 13%;
+        top: 44%;
+        left: 55%;
+    }
+
+    #mhHero .mh-crater.c3 {
+        width: 18%;
+        height: 18%;
+        bottom: 17%;
+        left: 30%;
+    }
+
+    #mhHero .mh-crater.c4 {
+        width: 10%;
+        height: 10%;
+        right: 18%;
+        top: 25%;
+    }
+
+    #mhHero .mh-crater.c5 {
+        width: 8%;
+        height: 8%;
+        right: 30%;
+        bottom: 25%;
+    }
+
+    #mhHero .mh-crater.c6 {
+        width: 7%;
+        height: 7%;
+        top: 62%;
+        left: 17%;
+    }
+
+    /* 5. FLYING BATS */
+    #mhHero .mh-flybat {
+        position: absolute;
+        z-index: 3;
+        left: -100px;
+        fill: #08040e;
+        opacity: 0;
+        pointer-events: none;
+        animation: mhFly 17s linear 1s infinite;
+    }
+
+    #mhHero .mh-flybat.f1 {
+        top: 10%;
+        width: 48px;
+        height: 25px;
+        animation-duration: 17s;
+        animation-delay: 1s;
+    }
+
+    #mhHero .mh-flybat.f2 {
+        top: 31%;
+        width: 34px;
+        height: 18px;
+        animation-duration: 23s;
+        animation-delay: 5s;
+    }
+
+    #mhHero .mh-flybat.f3 {
+        top: 20%;
+        width: 30px;
+        height: 16px;
+        animation-duration: 20s;
+        animation-delay: 9s;
+    }
+
+    #mhHero .mh-flybat.f4 {
+        top: 40%;
+        width: 38px;
+        height: 20px;
+        animation-duration: 21s;
+        animation-delay: 12s;
+    }
+
+    #mhHero .mh-flybat.f5 {
+        top: 7%;
+        width: 27px;
+        height: 15px;
+        animation-duration: 19s;
+        animation-delay: 7s;
+    }
+
+    /* ==========================================================
+   6. WIND + LAYERED MIST
+   Wind flows in multiple directions and at different speeds.
+========================================================== */
+
+    /* Deep, wide fog */
+    #mhHero .mh-wind-fog {
+        position: absolute;
+        z-index: 1;
+        left: -30%;
+        bottom: 4%;
+        width: 160%;
+        height: clamp(180px, 32vh, 330px);
+        pointer-events: none;
+        opacity: .72;
+        filter: blur(22px);
+
+        background:
+            radial-gradient(ellipse at 15% 65%,
+                rgba(210, 199, 231, .42) 0%,
+                rgba(175, 157, 205, .16) 30%,
+                transparent 62%),
+            radial-gradient(ellipse at 45% 45%,
+                rgba(190, 180, 220, .36) 0%,
+                rgba(145, 130, 177, .13) 38%,
+                transparent 66%),
+            radial-gradient(ellipse at 75% 60%,
+                rgba(215, 204, 235, .34) 0%,
+                rgba(165, 148, 197, .12) 36%,
+                transparent 64%);
+
+        animation: mhVisibleMist var(--mh-mist-speed) ease-in-out infinite alternate;
+        will-change: transform;
+    }
+
+    /* Upper mist moves in the opposite direction */
+    #mhHero .mh-wind-fog.fog-two {
+        bottom: 13%;
+        height: clamp(130px, 24vh, 250px);
+        opacity: .52;
+        filter: blur(30px);
+
+        background:
+            radial-gradient(ellipse at 25% 50%,
+                rgba(221, 214, 239, .34),
+                transparent 60%),
+            radial-gradient(ellipse at 65% 55%,
+                rgba(167, 151, 201, .32),
+                transparent 58%);
+
+        animation: mhVisibleMistReverse 19s ease-in-out infinite alternate;
+    }
+
+    /* Thin, curved wind streaks */
+    #mhHero .mh-wind-streak {
+        position: absolute;
+        z-index: 2;
+        left: -65%;
+        width: 58%;
+        height: 42px;
+        pointer-events: none;
+        opacity: 0;
+
+        border-top: 2px solid rgba(221, 213, 242, .48);
+        border-radius: 50%;
+
+        filter: blur(2px);
+
+        background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(189, 176, 218, .13) 35%,
+                rgba(226, 218, 242, .23) 52%,
+                transparent 100%);
+
+        animation: mhVisibleGust var(--mh-wind-speed) ease-in-out infinite;
+        will-change: left, transform, opacity;
+    }
+
+    #mhHero .mh-wind-streak::after {
+        content: "";
+        position: absolute;
+        left: 8%;
+        top: 10px;
+        width: 82%;
+        height: 12px;
+        border-radius: 50%;
+
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(193, 181, 221, .24),
+                rgba(230, 223, 243, .20),
+                transparent);
+
+        filter: blur(5px);
+    }
+
+    #mhHero .mh-wind-streak::before {
+        content: "";
+        position: absolute;
+        left: 15%;
+        top: 8px;
+        width: 65%;
+        height: 18px;
+        border-top: 1px solid rgba(224, 216, 241, .35);
+        border-radius: 50%;
+        transform: rotate(-3deg);
+    }
+
+    #mhHero .mh-wind-streak.w1 {
+        top: 36%;
+        animation-duration: 9s;
+        animation-delay: -2s;
+    }
+
+    #mhHero .mh-wind-streak.w2 {
+        top: 49%;
+        width: 44%;
+        height: 32px;
+        animation-duration: 12s;
+        animation-delay: -7s;
+    }
+
+    #mhHero .mh-wind-streak.w3 {
+        top: 62%;
+        width: 52%;
+        height: 38px;
+        animation-duration: 10s;
+        animation-delay: -4s;
+    }
+
+    /* Wide, soft currents of air */
+    #mhHero .mh-air-current {
+        position: absolute;
+        z-index: 2;
+        left: -55%;
+        width: 70%;
+        height: 75px;
+        pointer-events: none;
+        opacity: 0;
+        border-radius: 50%;
+
+        background: radial-gradient(ellipse at center,
+                rgba(207, 196, 229, .20) 0%,
+                rgba(173, 157, 205, .10) 42%,
+                transparent 72%);
+
+        filter: blur(12px);
+        animation: mhAirCurrent var(--mh-air-speed) ease-in-out infinite;
+        will-change: left, transform, opacity;
+    }
+
+    #mhHero .mh-air-current.a1 {
+        top: 42%;
+        animation-delay: -3s;
+    }
+
+    #mhHero .mh-air-current.a2 {
+        top: 57%;
+        width: 60%;
+        animation-duration: 17s;
+        animation-delay: -9s;
+    }
+
+    /* 7. HEADLINE AND DESCRIPTION */
+    #mhHero .mh-title {
+        position: relative;
+        z-index: 4;
+        max-width: 950px;
+        margin: 0;
+        padding: 0;
+        color: #f7ecd7;
+        font-family: "Pirata One", Georgia, serif;
+        font-size: clamp(48px, 8vw, 100px);
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: .015em;
+        text-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 0 35px rgba(255, 125, 40, .2);
+        animation: mhTextRise 1.5s ease-out both;
+    }
+
+    #mhHero .mh-title span {
+        color: #ffad61;
+    }
+
+    #mhHero .mh-description {
+        position: relative;
+        z-index: 4;
+        width: 100%;
+        max-width: 620px;
+        margin: 24px auto 30px;
+        color: var(--mh-mist);
+        font-size: clamp(16px, 2vw, 21px);
+        line-height: 1.8;
+        animation: mhTextRise 1.8s ease-out both;
+    }
+
+    /* 8. CTA BUTTONS */
+    #mhHero .mh-actions {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        animation: mhTextRise 2s ease-out both;
+    }
+
+    #mhHero .mh-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        min-height: 54px;
+        padding: 13px 28px;
+        border: 1px solid #ff8128;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #ff9a42, #ff741c);
+        color: #1b0b00;
+        font-family: "Spectral", Georgia, serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.4;
+        text-align: center;
+        box-shadow: 0 5px 18px rgba(255, 111, 26, .16), inset 0 1px 0 rgba(255, 255, 255, .3);
+        transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    #mhHero .mh-btn:hover {
+        transform: translateY(-3px);
+        color: #1b0b00;
+        box-shadow: 0 12px 28px rgba(255, 111, 26, .3), inset 0 1px 0 rgba(255, 255, 255, .35);
+    }
+
+    #mhHero .mh-btn.mh-ghost {
+        background: rgba(30, 14, 44, .35);
+        color: #f5ead5;
+        border-color: rgba(218, 199, 232, .55);
+        box-shadow: none;
+    }
+
+    #mhHero .mh-btn.mh-ghost:hover {
+        background: rgba(95, 57, 125, .3);
+        color: #fff5e4;
+        border-color: #f5ead5;
+    }
+
+    #mhHero a:focus-visible,
+    #mhHero .mh-pumpkin:focus-visible {
+        outline: 3px solid #a6ef76;
+        outline-offset: 5px;
+    }
+
+    /* 9. INTERACTIVE PUMPKINS */
+    #mhHero .mh-pumpkin {
+        position: absolute;
+        z-index: 6;
+        bottom: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 115px;
+        height: 95px;
+        padding: 0;
+        border: 0;
+        border-radius: 48% 48% 43% 43%;
+
+        background:
+            radial-gradient(ellipse at 35% 25%, #ffbd66 0%, #ff8a22 35%, #d94b08 75%, #8d2607 100%);
+
+        box-shadow: inset 8px 0 10px rgba(255, 190, 95, .35), inset -10px 0 15px rgba(80, 22, 0, .35);
+        cursor: pointer;
+        appearance: none;
+        animation: mhPumpkinFloat 3s ease-in-out infinite alternate;
+    }
+
+    #mhHero .mh-pumpkin.left {
+        left: 5%;
+        transform: rotate(-8deg);
+    }
+
+    #mhHero .mh-pumpkin.right {
+        right: 5%;
+        width: 102px;
+        height: 85px;
+        animation-delay: -1.4s;
+    }
+
+    #mhHero .mh-pumpkin::before {
+        content: "";
+        position: absolute;
+        inset: 2px 20px;
+        z-index: 1;
+        border-left: 3px solid rgba(110, 35, 0, .3);
+        border-right: 3px solid rgba(110, 35, 0, .3);
+        border-radius: 50%;
+        box-shadow: -12px 0 0 rgba(255, 180, 70, .15), 12px 0 0 rgba(110, 35, 0, .2);
+        pointer-events: none;
+    }
+
+    #mhHero .mh-pumpkin::after {
+        content: "";
+        position: absolute;
+        inset: -18px;
+        z-index: -1;
+        border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(255, 151, 38, .52), rgba(255, 116, 21, .2) 42%, transparent 72%);
+        opacity: .95;
+        filter: blur(8px);
+        animation: mhFlameGlow 1.8s ease-in-out infinite alternate;
+        pointer-events: none;
+    }
+
+    #mhHero .mh-pumpkin .mh-stem {
+        position: absolute;
+        z-index: 2;
+        top: -15px;
+        left: 48%;
+        width: 18px;
+        height: 24px;
+        border-radius: 4px 5px 2px 2px;
+        background: linear-gradient(90deg, #3d5225, #78913a, #35491d);
+        transform: rotate(8deg);
+    }
+
+    #mhHero .mh-pumpkin .mh-face {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        filter: brightness(1);
+        transition: filter .25s ease;
+    }
+
+    #mhHero .mh-pumpkin .mh-face path {
+        fill: #ffed91;
+    }
+
+    #mhHero .mh-pumpkin.mh-lit .mh-face {
+        filter: brightness(1.2) drop-shadow(0 0 7px #ffed91);
+        animation: mhFaceFlicker 2.8s ease-in-out infinite alternate;
+    }
+
+    #mhHero .mh-pumpkin.mh-off::after {
+        opacity: .02;
+        animation: none;
+    }
+
+    #mhHero .mh-pumpkin.mh-off .mh-face {
+        filter: brightness(.12);
+        animation: none;
+    }
+
+    #mhHero .mh-pumpkin:hover {
+        filter: brightness(1.08);
+    }
+
+    #mhHero .mh-pumpkin:active {
+        filter: brightness(.92);
+    }
+
+    /* 10. FOREST LANDSCAPE */
+    #mhHero .mh-landscape {
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        width: 100%;
+        height: 185px;
+        pointer-events: none;
+    }
+
+    #mhHero .mh-ground-back {
+        position: absolute;
+        left: 0;
+        bottom: 45px;
+        width: 100%;
+        height: 125px;
+        fill: #1a0d29;
+    }
+
+    #mhHero .mh-ground {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        width: 100%;
+        height: 110px;
+        fill: #241338;
+    }
+
+    /* 11. ANIMATIONS */
+    @keyframes mhMoonRise {
+        0% {
+            transform: translateY(55px) scale(.82);
+            opacity: 0;
+        }
+
+        70% {
+            opacity: 1;
+            transform: translateY(-6px) scale(1.03);
+        }
+
+        100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes mhTextRise {
+        from {
+            transform: translateY(25px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes mhTwinkle {
+        from {
+            opacity: .3;
+            transform: scale(.7);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+    }
+
+    @keyframes mhFly {
+        0% {
+            left: -80px;
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+        }
+
+        8% {
+            opacity: .9;
+        }
+
+        25% {
+            transform: translateY(-25px) rotate(-8deg);
+        }
+
+        50% {
+            transform: translateY(25px) rotate(8deg);
+        }
+
+        75% {
+            transform: translateY(-18px) rotate(-5deg);
+        }
+
+        92% {
+            opacity: .9;
+        }
+
+        100% {
+            left: calc(100% + 80px);
+            transform: translateY(12px) rotate(5deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes mhFlameGlow {
+        from {
+            transform: scale(.92);
+            filter: blur(7px);
+        }
+
+        to {
+            transform: scale(1.1);
+            filter: blur(11px);
+        }
+    }
+
+    @keyframes mhFaceFlicker {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        25% {
+            opacity: .85;
+        }
+
+        30% {
+            opacity: 1;
+        }
+
+        65% {
+            opacity: .9;
+        }
+
+        72% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes mhPumpkinFloat {
+        from {
+            margin-bottom: 0;
+        }
+
+        to {
+            margin-bottom: 4px;
+        }
+    }
+
+    /* Main mist drifts with slow, changing movement */
+    @keyframes mhVisibleMist {
+        0% {
+            transform: translate3d(-7%, 8px, 0) scale(.96);
+        }
+
+        25% {
+            transform: translate3d(-2%, -5px, 0) scale(1.02);
+        }
+
+        55% {
+            transform: translate3d(5%, 4px, 0) scale(1.07);
+        }
+
+        78% {
+            transform: translate3d(2%, -8px, 0) scale(1.04);
+        }
+
+        100% {
+            transform: translate3d(10%, -2px, 0) scale(1.02);
+        }
+    }
+
+    /* Secondary mist moves back against the main layer */
+    @keyframes mhVisibleMistReverse {
+        0% {
+            transform: translate3d(8%, 3px, 0) scaleX(1.08);
+        }
+
+        35% {
+            transform: translate3d(2%, -8px, 0) scaleX(.98);
+        }
+
+        68% {
+            transform: translate3d(-5%, 5px, 0) scaleX(1.04);
+        }
+
+        100% {
+            transform: translate3d(-10%, -3px, 0) scaleX(1.06);
+        }
+    }
+
+    /* Wind gusts travel across the hero */
+    @keyframes mhVisibleGust {
+        0% {
+            left: -65%;
+            opacity: 0;
+            transform: translateY(12px) rotate(-5deg) scaleX(.75);
+        }
+
+        12% {
+            opacity: .8;
+        }
+
+        32% {
+            opacity: .65;
+            transform: translateY(-5px) rotate(2deg) scaleX(1.05);
+        }
+
+        58% {
+            opacity: .35;
+            transform: translateY(7px) rotate(-2deg) scaleX(1.12);
+        }
+
+        78% {
+            opacity: .15;
+        }
+
+        100% {
+            left: 115%;
+            opacity: 0;
+            transform: translateY(-6px) rotate(3deg) scaleX(1.15);
+        }
+    }
+
+    /* Soft, wide wind currents */
+    @keyframes mhAirCurrent {
+        0% {
+            left: -55%;
+            opacity: 0;
+            transform: translateY(10px) rotate(-5deg) scaleX(.8);
+        }
+
+        18% {
+            opacity: .8;
+        }
+
+        48% {
+            opacity: .55;
+            transform: translateY(-9px) rotate(3deg) scaleX(1.15);
+        }
+
+        76% {
+            opacity: .2;
+        }
+
+        100% {
+            left: 115%;
+            opacity: 0;
+            transform: translateY(8px) rotate(-2deg) scaleX(1.1);
+        }
+    }
+
+    /* 12. TABLET */
+    @media (max-width: 768px) {
+        #mhHero {
+            min-height: 700px;
+            padding: 50px 22px 160px;
+        }
+
+        #mhHero .mh-moon-wrap {
+            width: min(250px, 58vw);
+            margin-bottom: 28px;
+        }
+
+        #mhHero .mh-title {
+            font-size: clamp(48px, 9vw, 76px);
+        }
+
+        #mhHero .mh-description {
+            max-width: 540px;
+            margin: 20px auto 28px;
+        }
+
+        #mhHero .mh-landscape {
+            height: 155px;
+        }
+
+        #mhHero .mh-ground {
+            height: 95px;
+        }
+
+        #mhHero .mh-ground-back {
+            height: 100px;
+            bottom: 38px;
+        }
+
+        #mhHero .mh-pumpkin {
+            width: 90px;
+            height: 75px;
+            bottom: 52px;
+        }
+
+        #mhHero .mh-pumpkin.right {
+            width: 82px;
+            height: 69px;
+        }
+
+        #mhHero .mh-flybat.f1 {
+            top: 9%;
+        }
+
+        #mhHero .mh-flybat.f2 {
+            top: 27%;
+        }
+
+        #mhHero .mh-flybat.f3 {
+            top: 17%;
+        }
+
+        #mhHero .mh-flybat.f4 {
+            top: 38%;
+        }
+
+        #mhHero .mh-flybat.f5 {
+            top: 6%;
+        }
+
+        #mhHero .mh-wind-fog {
+            height: 220px;
+        }
+
+        #mhHero .mh-wind-fog.fog-two {
+            height: 165px;
+        }
+
+        #mhHero .mh-wind-streak {
+            width: 72%;
+        }
+    }
+
+    /* 13. MOBILE */
+    @media (max-width: 520px) {
+        #mhHero {
+            min-height: 680px;
+            padding: 42px 18px 140px;
+        }
+
+        #mhHero .mh-moon-wrap {
+            width: min(220px, 59vw);
+            margin-bottom: 25px;
+        }
+
+        #mhHero .mh-title {
+            font-size: clamp(43px, 11vw, 60px);
+            line-height: 1.08;
+        }
+
+        #mhHero .mh-description {
+            max-width: 390px;
+            margin: 18px auto 25px;
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        #mhHero .mh-actions {
+            width: 100%;
+            max-width: 340px;
+            flex-direction: column;
+            gap: 11px;
+            margin-inline: auto;
+        }
+
+        #mhHero .mh-btn {
+            width: 100%;
+            min-height: 49px;
+            padding: 12px 18px;
+            font-size: 15px;
+        }
+
+        #mhHero .mh-landscape {
+            height: 125px;
+        }
+
+        #mhHero .mh-ground {
+            height: 78px;
+        }
+
+        #mhHero .mh-ground-back {
+            height: 82px;
+            bottom: 30px;
+        }
+
+        #mhHero .mh-pumpkin {
+            width: 70px;
+            height: 60px;
+            bottom: 42px;
+        }
+
+        #mhHero .mh-pumpkin.left {
+            left: 3%;
+        }
+
+        #mhHero .mh-pumpkin.right {
+            right: 3%;
+            width: 62px;
+            height: 54px;
+        }
+
+        #mhHero .mh-pumpkin .mh-stem {
+            top: -12px;
+            width: 13px;
+            height: 20px;
+        }
+
+        #mhHero .mh-flybat.f1 {
+            top: 8%;
+            width: 36px;
+            height: 20px;
+        }
+
+        #mhHero .mh-flybat.f2 {
+            top: 26%;
+            width: 27px;
+            height: 15px;
+        }
+
+        #mhHero .mh-flybat.f3 {
+            top: 16%;
+            width: 26px;
+            height: 14px;
+        }
+
+        #mhHero .mh-flybat.f4 {
+            top: 35%;
+            width: 30px;
+            height: 17px;
+        }
+
+        #mhHero .mh-flybat.f5 {
+            top: 5%;
+            width: 23px;
+            height: 13px;
+        }
+
+        #mhHero .mh-wind-fog {
+            height: 175px;
+            filter: blur(17px);
+        }
+
+        #mhHero .mh-wind-fog.fog-two {
+            height: 130px;
+            filter: blur(22px);
+        }
+
+        #mhHero .mh-wind-streak {
+            width: 85%;
+        }
+
+        #mhHero .mh-air-current {
+            width: 85%;
+        }
+    }
+
+    /* 14. EXTRA SMALL PHONES */
+    @media (max-width: 360px) {
+        #mhHero {
+            min-height: 650px;
+            padding: 36px 14px 120px;
+        }
+
+        #mhHero .mh-moon-wrap {
+            width: 190px;
+            margin-bottom: 22px;
+        }
+
+        #mhHero .mh-title {
+            font-size: 42px;
+        }
+
+        #mhHero .mh-description {
+            font-size: 14px;
+        }
+
+        #mhHero .mh-pumpkin {
+            width: 57px;
+            height: 49px;
+            bottom: 37px;
+        }
+
+        #mhHero .mh-pumpkin.right {
+            width: 51px;
+            height: 44px;
+        }
+    }
+
+    /* 15. ACCESSIBILITY */
+    @media (prefers-reduced-motion: reduce) {
+
+        #mhHero *,
+        #mhHero *::before,
+        #mhHero *::after {
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
+        }
+
+        #mhHero .mh-flybat {
+            display: none;
+        }
+    }
+</style>
+
+<section id="mhHero" class="mh-hero" aria-label="Moonhollow Apothecary Halloween hero">
+
+    <!-- Night sky -->
+    <div class="mh-sky" aria-hidden="true">
+        <span class="mh-star s1"></span>
+        <span class="mh-star s2"></span>
+        <span class="mh-star s3"></span>
+        <span class="mh-star s4"></span>
+    </div>
+
+    <!-- Wind and layered mist -->
+    <div class="mh-wind-fog" aria-hidden="true"></div>
+    <div class="mh-wind-fog fog-two" aria-hidden="true"></div>
+
+    <span class="mh-wind-streak w1" aria-hidden="true"></span>
+    <span class="mh-wind-streak w2" aria-hidden="true"></span>
+    <span class="mh-wind-streak w3" aria-hidden="true"></span>
+
+    <span class="mh-air-current a1" aria-hidden="true"></span>
+    <span class="mh-air-current a2" aria-hidden="true"></span>
+
+    <!-- Flying bats -->
+    <svg class="mh-flybat f1" viewBox="0 0 60 30" aria-hidden="true">
+        <path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z" />
+    </svg>
+
+    <svg class="mh-flybat f2" viewBox="0 0 60 30" aria-hidden="true">
+        <path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z" />
+    </svg>
+
+    <svg class="mh-flybat f3" viewBox="0 0 60 30" aria-hidden="true">
+        <path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z" />
+    </svg>
+
+    <svg class="mh-flybat f4" viewBox="0 0 60 30" aria-hidden="true">
+        <path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z" />
+    </svg>
+
+    <svg class="mh-flybat f5" viewBox="0 0 60 30" aria-hidden="true">
+        <path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z" />
+    </svg>
+
+    <!-- Glowing moon -->
+    <div class="mh-moon-wrap">
+        <div class="mh-moon" role="img" aria-label="Glowing full moon">
+            <span class="mh-crater c1"></span>
+            <span class="mh-crater c2"></span>
+            <span class="mh-crater c3"></span>
+            <span class="mh-crater c4"></span>
+            <span class="mh-crater c5"></span>
+            <span class="mh-crater c6"></span>
+        </div>
+    </div>
+
+    <!-- Hero text -->
+    <h1 class="mh-title">
+        Quiet nights.<br>
+        <span>Calmer minds.</span>
+    </h1>
+
+    <p class="mh-description">
+        The witches are brewing, the moon is glowing, and your spooky-season favorites are waiting. 🎃✨ Ready to treat
+        yourself?
+    </p>
+
+    <!-- CTA buttons -->
+    <div class="mh-actions">
+        <a class="mh-btn" href="https://blacklabelpharma.com/sho-p/">
+            Browse the shelf <span aria-hidden="true">→</span>
+        </a>
+
+        <a class="mh-btn mh-ghost" href="#sale">
+            See Halloween deals
+        </a>
+    </div>
+
+    <!-- Left pumpkin -->
+    <button type="button" class="mh-pumpkin left mh-lit" aria-label="Turn left pumpkin light off" aria-pressed="true">
+        <span class="mh-stem" aria-hidden="true"></span>
+        <svg class="mh-face" viewBox="0 0 120 100" aria-hidden="true">
+            <path d="M28 35 L48 35 L38 52 Z" />
+            <path d="M72 35 L92 35 L82 52 Z" />
+            <path d="M28 62 L42 70 L50 64 L60 76 L70 64 L80 70 L94 62 L90 80 L78 88 L45 88 L32 78 Z" />
+        </svg>
+    </button>
+
+    <!-- Right pumpkin -->
+    <button type="button" class="mh-pumpkin right mh-lit" aria-label="Turn right pumpkin light off" aria-pressed="true">
+        <span class="mh-stem" aria-hidden="true"></span>
+        <svg class="mh-face" viewBox="0 0 120 100" aria-hidden="true">
+            <path d="M28 35 L48 35 L38 52 Z" />
+            <path d="M72 35 L92 35 L82 52 Z" />
+            <path d="M28 62 L42 70 L50 64 L60 76 L70 64 L80 70 L94 62 L90 80 L78 88 L45 88 L32 78 Z" />
+        </svg>
+    </button>
+
+    <!-- Forest landscape -->
+    <div class="mh-landscape" aria-hidden="true">
+        <svg class="mh-ground-back" viewBox="0 0 1200 150" preserveAspectRatio="none">
+            <path
+                d="M0 150 V100 L35 75 L55 100 L75 45 L95 100 L140 85 L170 115 L210 55 L235 110 L280 90 L310 125 L360 65 L390 110 L440 90 L480 120 L520 50 L550 110 L600 85 L630 120 L680 55 L710 110 L760 85 L800 120 L850 40 L880 105 L920 80 L950 115 L990 55 L1020 110 L1070 85 L1100 120 L1140 50 L1170 105 L1200 85 V150 Z" />
+        </svg>
+
+        <svg class="mh-ground" viewBox="0 0 1200 110" preserveAspectRatio="none">
+            <path
+                d="M0 110 V55 C80 20 120 80 200 48 S330 20 400 55 S520 85 600 48 S740 15 820 55 S960 85 1040 45 S1140 25 1200 55 V110 Z" />
+        </svg>
+    </div>
+
+</section>
+
+<script>
+    (function () {
+        function initMoonhollowHero() {
+            var hero = document.getElementById("mhHero");
+
+            if (!hero || hero.dataset.mhInitialized === "true") return;
+
+            hero.dataset.mhInitialized = "true";
+
+            hero.querySelectorAll(".mh-pumpkin").forEach(function (pumpkin) {
+                pumpkin.addEventListener("click", function () {
+                    var turnOn = !pumpkin.classList.contains("mh-lit");
+                    var side = pumpkin.classList.contains("left") ? "left" : "right";
+
+                    pumpkin.classList.toggle("mh-lit", turnOn);
+                    pumpkin.classList.toggle("mh-off", !turnOn);
+
+                    pumpkin.setAttribute("aria-pressed", String(turnOn));
+                    pumpkin.setAttribute(
+                        "aria-label",
+                        "Turn " + side + " pumpkin light " + (turnOn ? "off" : "on")
+                    );
+                });
+            });
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initMoonhollowHero);
+        } else {
+            initMoonhollowHero();
+        }
+    })();
+</script>

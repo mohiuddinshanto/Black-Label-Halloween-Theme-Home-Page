@@ -1,0 +1,508 @@
+// advance এ গিয়ে css classess এ gift-section এইটা বসাতে হবে প্রথমে 
+
+// তারপর custom css এ গিয়ে gift-section এর জন্য css লিখতে হবে */
+
+/* ================= রং ও ফন্ট এখান থেকে বদলান ================= */
+.gift-section{
+  --gs-section-bg:#241338;
+  --gs-card-bg:#14091f;
+  --gs-card-border:#4a2c6e;
+  --gs-text:#f1e8d6;
+  --gs-muted:#b9a9d1;
+  --gs-tab:#b9a9d1;
+  --gs-tab-active:#f1e8d6;
+  --gs-btn:#ff7a1a;
+  --gs-btn-hover:#ff9440;
+  --gs-btn-text:#1b0b00;
+  --gs-badge-bg:#ff7a1a;
+  --gs-badge-text:#1b0b00;
+
+  --gs-font-body:'Spectral','Hind Siliguri',Georgia,serif;
+  --gs-font-head:'Pirata One','Hind Siliguri',Georgia,serif;
+  --wd-text-font:var(--gs-font-body);
+  --wd-title-font:var(--gs-font-head);
+  --wd-entities-title-font:var(--gs-font-head);
+}
+
+/* ================= সেকশন ব্যাকগ্রাউন্ড ================= */
+html body .gift-section{
+  background:var(--gs-section-bg) !important;
+}
+
+/* ================= সাধারণ লেখার ফন্ট ================= */
+html body .gift-section,
+html body .gift-section .wd-nav > li > a,
+html body .gift-section .wd-nav > li > a span,
+html body .gift-section .wd-product,
+html body .gift-section .wd-product p,
+html body .gift-section .wd-product .stock,
+html body .gift-section .wd-product .wd-product-stock,
+html body .gift-section .wd-product .price,
+html body .gift-section .wd-product .price *,
+html body .gift-section .wd-product .woocommerce-Price-amount,
+html body .gift-section .wd-product bdi,
+html body .gift-section .wd-product .product-label,
+html body .gift-section .wd-product .wd-add-btn > a,
+html body .gift-section .wd-product .wd-add-btn > a *,
+html body .gift-section .wd-product a.add_to_cart_button{
+  font-family:var(--gs-font-body) !important;
+}
+
+/* ================= ট্যাব মেনু ================= */
+html body .gift-section .wd-nav,
+html body .gift-section .wd-nav-tabs,
+html body .gift-section .wd-tabs-header .wd-nav{
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  gap:0 !important;
+  overflow-x:auto !important;
+  scrollbar-width:none !important;
+  border:0 !important;
+}
+html body .gift-section .wd-nav::-webkit-scrollbar{display:none !important}
+html body .gift-section .wd-nav > li{flex:0 0 auto !important}
+html body .gift-section .wd-nav > li > a{
+  padding:10px 0 !important;
+  margin:0 24px 0 0 !important;
+  background:transparent !important;
+  border:0 !important;
+  border-bottom:2px solid transparent !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  white-space:nowrap !important;
+  color:var(--gs-tab) !important;
+}
+html body .gift-section .wd-nav > li > a .nav-link-text,
+html body .gift-section .wd-nav > li > a span{
+  font-size:14px !important;
+  font-weight:600 !important;
+  letter-spacing:.03em !important;
+  text-transform:uppercase !important;
+  color:inherit !important;
+}
+html body .gift-section .wd-nav > li > a:hover,
+html body .gift-section .wd-nav > li.wd-active > a{
+  color:var(--gs-tab-active) !important;
+  border-bottom-color:var(--gs-tab-active) !important;
+}
+html body .gift-section .wd-nav > li > a::before,
+html body .gift-section .wd-nav > li > a::after{display:none !important}
+
+/* ================= প্রোডাক্ট কার্ড ================= */
+html body .gift-section .wd-product{
+  background:transparent !important;
+  border:0 !important;
+  padding:0 !important;
+  box-shadow:none !important;
+}
+html body .gift-section .wd-product .product-wrapper{
+  background:var(--gs-card-bg) !important;
+  background-color:var(--gs-card-bg) !important;
+  border:1px solid var(--gs-card-border) !important;
+  border-radius:10px !important;
+  padding:14px !important;
+  box-shadow:0 1px 4px rgba(0,0,0,.06) !important;
+  height:100% !important;
+}
+html body .gift-section .wd-product .product-element-top{
+  border-radius:12px !important;
+  overflow:hidden !important;
+  margin-bottom:12px !important;
+  background:transparent !important;
+}
+html body .gift-section .wd-product .product-element-top img{
+  width:100% !important;
+  aspect-ratio:1/1 !important;
+  object-fit:cover !important;
+}
+html body .gift-section .wd-product .product-element-bottom{
+  background:transparent !important;
+  padding:0 !important;
+}
+
+/* ================= সব লেখার রং ================= */
+html body .gift-section .wd-product,
+html body .gift-section .wd-product p,
+html body .gift-section .wd-product .wd-entities-title,
+html body .gift-section .wd-product .wd-entities-title a,
+html body .gift-section .wd-product .stock,
+html body .gift-section .wd-product .wd-product-stock,
+html body .gift-section .wd-product .in-stock,
+html body .gift-section .wd-product .woocommerce-Price-amount,
+html body .gift-section .wd-product .woocommerce-Price-currencySymbol,
+html body .gift-section .wd-product bdi{
+  color:var(--gs-text) !important;
+}
+
+/* ================= প্রোডাক্টের নাম (টাইটেল) ================= */
+html body .gift-section .wd-product .wd-entities-title,
+html body .gift-section .wd-product .wd-entities-title a{
+  font-family:var(--gs-font-head) !important;
+  font-size:22px !important;
+  font-weight:400 !important;
+  letter-spacing:.02em !important;
+  line-height:1.15 !important;
+  text-transform:none !important;
+  margin-bottom:6px !important;
+}
+html body .gift-section h1,
+html body .gift-section h2,
+html body .gift-section h3,
+html body .gift-section h4{
+  font-family:var(--gs-font-head) !important;
+  font-weight:400 !important;
+  letter-spacing:.02em !important;
+}
+
+/* ================= In stock ================= */
+html body .gift-section .wd-product .stock,
+html body .gift-section .wd-product .wd-product-stock{
+  font-size:16px !important;
+  font-weight:500 !important;
+  margin:6px 0 !important;
+}
+
+/* ================= দাম ================= */
+html body .gift-section .wd-product .price{
+  display:flex !important;
+  align-items:center !important;
+  flex-wrap:wrap !important;
+  gap:8px !important;
+  margin:8px 0 12px !important;
+  font-size:18px !important;
+  font-weight:600 !important;
+  color:var(--gs-text) !important;
+}
+html body .gift-section .wd-product .price del,
+html body .gift-section .wd-product .price del *{
+  order:-1 !important;
+  font-size:14px !important;
+  font-weight:400 !important;
+  color:var(--gs-muted) !important;
+  opacity:1 !important;
+}
+html body .gift-section .wd-product .price ins{
+  background:none !important;
+  text-decoration:none !important;
+  font-weight:600 !important;
+}
+html body .gift-section .wd-product .price ins *{color:var(--gs-text) !important}
+
+/* ================= ডিসকাউন্ট ব্যাজ ================= */
+html body .gift-section .wd-product .product-labels{
+  top:12px !important;
+  left:12px !important;
+  right:auto !important;
+}
+html body .gift-section .wd-product .product-label,
+html body .gift-section .wd-product .product-label.onsale{
+  background:var(--gs-badge-bg) !important;
+  color:var(--gs-badge-text) !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  height:auto !important;
+  line-height:1.5 !important;
+  padding:2px 12px !important;
+  border-radius:999px !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+}
+
+/* ================= বাটন (ডিফল্ট লেখা থাকবে) ================= */
+html body .gift-section .wd-product .wd-add-btn,
+html body .gift-section .wd-product .wd-add-btn-replace{
+  display:block !important;
+  width:100% !important;
+  margin:0 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  position:static !important;
+  transform:none !important;
+}
+html body .gift-section .wd-product .wd-add-btn > a,
+html body .gift-section .wd-product a.add_to_cart_button,
+html body .gift-section .wd-product a.product_type_variable,
+html body .gift-section .wd-product a.product_type_simple{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:42px !important;
+  min-height:42px !important;
+  padding:0 12px !important;
+  background:var(--gs-btn) !important;
+  background-color:var(--gs-btn) !important;
+  color:var(--gs-btn-text) !important;
+  border:0 !important;
+  border-radius:4px !important;
+  box-shadow:none !important;
+  font-size:16px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  text-transform:none !important;
+  letter-spacing:0 !important;
+}
+html body .gift-section .wd-product .wd-add-btn > a *,
+html body .gift-section .wd-product a.add_to_cart_button *{
+  color:var(--gs-btn-text) !important;
+  font-size:16px !important;
+  font-weight:600 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+}
+html body .gift-section .wd-product .wd-add-btn > a::before,
+html body .gift-section .wd-product a.add_to_cart_button::before{
+  display:none !important;
+  content:none !important;
+}
+html body .gift-section .wd-product .wd-add-btn > a:not(.loading)::after,
+html body .gift-section .wd-product a.add_to_cart_button:not(.loading)::after{
+  display:none !important;
+  content:none !important;
+}
+html body .gift-section .wd-product .wd-add-btn > a:hover,
+html body .gift-section .wd-product a.add_to_cart_button:hover{
+  background:var(--gs-btn-hover) !important;
+  color:var(--gs-btn-text) !important;
+}
+
+/* ================= ক্যারাউসেল অ্যারো ================= */
+html body .gift-section .wd-btn-arrow,
+html body .gift-section .wd-nav-arrows .wd-btn-arrow{
+  color:var(--gs-tab-active) !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* ================= মোবাইল ================= */
+@media(max-width:767px){
+  html body .gift-section .wd-nav > li > a{margin-right:16px !important}
+  html body .gift-section .wd-nav > li > a span{font-size:12px !important}
+  html body .gift-section .wd-product .product-wrapper{padding:10px !important}
+  html body .gift-section .wd-product .price{font-size:16px !important}
+  html body .gift-section .wd-product .wd-entities-title,
+  html body .gift-section .wd-product .wd-entities-title a{font-size:19px !important}
+}
+
+
+
+/* ================= কার্ডের উপরের রঙিন লাইন ================= */
+.gift-section{
+  --gs-c1:#b48cff;  /* বেগুনি */
+  --gs-c2:#ff7a1a;  /* কমলা */
+  --gs-c3:#5ec4ff;  /* নীল */
+  --gs-c4:#9be564;  /* সবুজ */
+}
+
+/* ডিফল্ট রং (কোনো নিয়ম না ধরলেও লাইন থাকবে) */
+html body .gift-section .wd-product .product-wrapper{
+  border-top:4px solid var(--gs-c1) !important;
+}
+
+/* ক্যারাউসেল স্লাইড + গ্রিড, দুই ধরনের লেআউটেই কাজ করবে */
+html body .gift-section .wd-carousel-item:nth-child(4n+1) .product-wrapper,
+html body .gift-section .swiper-slide:nth-child(4n+1) .product-wrapper,
+html body .gift-section .owl-item:nth-child(4n+1) .product-wrapper,
+html body .gift-section .wd-product:nth-child(4n+1) .product-wrapper{
+  border-top-color:var(--gs-c1) !important;
+}
+html body .gift-section .wd-carousel-item:nth-child(4n+2) .product-wrapper,
+html body .gift-section .swiper-slide:nth-child(4n+2) .product-wrapper,
+html body .gift-section .owl-item:nth-child(4n+2) .product-wrapper,
+html body .gift-section .wd-product:nth-child(4n+2) .product-wrapper{
+  border-top-color:var(--gs-c2) !important;
+}
+html body .gift-section .wd-carousel-item:nth-child(4n+3) .product-wrapper,
+html body .gift-section .swiper-slide:nth-child(4n+3) .product-wrapper,
+html body .gift-section .owl-item:nth-child(4n+3) .product-wrapper,
+html body .gift-section .wd-product:nth-child(4n+3) .product-wrapper{
+  border-top-color:var(--gs-c3) !important;
+}
+html body .gift-section .wd-carousel-item:nth-child(4n+4) .product-wrapper,
+html body .gift-section .swiper-slide:nth-child(4n+4) .product-wrapper,
+html body .gift-section .owl-item:nth-child(4n+4) .product-wrapper,
+html body .gift-section .wd-product:nth-child(4n+4) .product-wrapper{
+  border-top-color:var(--gs-c4) !important;
+}
+
+/* ================= মোবাইল/ট্যাব ফিক্স: বাটনের লেখা + SOLD OUT ব্যাজ ================= */
+@media(max-width:1024px){
+  /* বাটন: লেখা জোর করে দেখানো (Select options / ডিফল্ট লেখা) */
+  html body .gift-section .wd-product .wd-add-btn > a,
+  html body .gift-section .wd-product a.add_to_cart_button,
+  html body .gift-section .wd-product a.product_type_variable,
+  html body .gift-section .wd-product a.product_type_simple{
+    height:auto !important;
+    min-height:38px !important;
+    padding:8px 6px !important;
+    font-size:13px !important;
+    line-height:1.2 !important;
+    text-align:center !important;
+    white-space:normal !important;
+    word-break:break-word !important;
+  }
+  html body .gift-section .wd-product .wd-add-btn > a span,
+  html body .gift-section .wd-product a.add_to_cart_button span,
+  html body .gift-section .wd-product a.product_type_variable span,
+  html body .gift-section .wd-product a.product_type_simple span{
+    display:inline !important;
+    position:static !important;
+    width:auto !important;
+    height:auto !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    font-size:13px !important;
+    line-height:1.2 !important;
+    clip:auto !important;
+    transform:none !important;
+  }
+  /* আইকনের জায়গা খালি রাখা যাবে না */
+  html body .gift-section .wd-product .wd-add-btn > a::before,
+  html body .gift-section .wd-product a.add_to_cart_button::before{
+    display:none !important;
+    content:none !important;
+  }
+
+  /* SOLD OUT ও অন্য সব ব্যাজ ছোট করা */
+  html body .gift-section .wd-product .product-label,
+  html body .gift-section .wd-product .product-label.out-of-stock,
+  html body .gift-section .wd-product .product-label.onsale{
+    font-size:10px !important;
+    font-weight:600 !important;
+    line-height:1.4 !important;
+    letter-spacing:0 !important;
+    padding:1px 8px !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    height:auto !important;
+    width:auto !important;
+    max-width:80% !important;
+    white-space:nowrap !important;
+    text-transform:uppercase !important;
+  }
+  html body .gift-section .wd-product .product-labels{
+    top:8px !important;
+    left:8px !important;
+    gap:4px !important;
+  }
+}
+
+/* খুব ছোট মোবাইল */
+@media(max-width:480px){
+  html body .gift-section .wd-product .wd-add-btn > a,
+  html body .gift-section .wd-product a.add_to_cart_button,
+  html body .gift-section .wd-product .wd-add-btn > a span,
+  html body .gift-section .wd-product a.add_to_cart_button span{
+    font-size:12px !important;
+  }
+  html body .gift-section .wd-product .product-label,
+  html body .gift-section .wd-product .product-label.out-of-stock{
+    font-size:9px !important;
+    padding:1px 6px !important;
+  }
+}
+
+
+/* ================= মোবাইল/ট্যাব: বাটনের বাড়তি প্যাডিং + ব্যাজ ফিক্স ================= */
+@media(max-width:1024px){
+
+  /* কার্ডের নিচের অংশের বাড়তি জায়গা বাদ */
+  html body .gift-section .wd-product .product-wrapper{
+    padding:10px 10px 10px !important;
+    overflow:hidden !important;
+  }
+  html body .gift-section .wd-product .product-element-bottom{
+    padding:0 !important;
+    margin:0 !important;
+    min-height:0 !important;
+  }
+  html body .gift-section .wd-product .wd-add-btn,
+  html body .gift-section .wd-product .wd-add-btn-replace{
+    margin:8px 0 0 !important;
+    padding:0 !important;
+    min-height:0 !important;
+    height:auto !important;
+    line-height:1 !important;
+  }
+
+  /* বাটন: লেখার সমান উচ্চতা, বাড়তি প্যাডিং নেই */
+  html body .gift-section .wd-product .wd-add-btn > a,
+  html body .gift-section .wd-product a.add_to_cart_button,
+  html body .gift-section .wd-product a.product_type_variable,
+  html body .gift-section .wd-product a.product_type_simple{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:9px 8px !important;
+    border-radius:6px !important;
+    font-size:13px !important;
+    line-height:1.2 !important;
+    text-align:center !important;
+    white-space:normal !important;
+    box-sizing:border-box !important;
+  }
+  html body .gift-section .wd-product .wd-add-btn > a span,
+  html body .gift-section .wd-product a.add_to_cart_button span{
+    display:inline !important;
+    margin:0 !important;
+    padding:0 !important;
+    line-height:1.2 !important;
+    font-size:13px !important;
+  }
+
+  /* ব্যাজ (SOLD OUT, -33%): বক্স লেখার সাইজ অনুযায়ী বাড়বে */
+  html body .gift-section .wd-product .product-labels{
+    top:8px !important;
+    left:8px !important;
+    right:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:4px !important;
+  }
+  html body .gift-section .wd-product .product-label,
+  html body .gift-section .wd-product .product-label.out-of-stock,
+  html body .gift-section .wd-product .product-label.onsale{
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:auto !important;
+    height:auto !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:3px 10px !important;
+    border-radius:999px !important;
+    font-size:11px !important;
+    font-weight:600 !important;
+    line-height:1.3 !important;
+    letter-spacing:.02em !important;
+    white-space:nowrap !important;
+    overflow:visible !important;
+    text-align:center !important;
+    box-sizing:content-box !important;
+  }
+}
+
+/* খুব ছোট মোবাইল */
+@media(max-width:480px){
+  html body .gift-section .wd-product .wd-add-btn > a,
+  html body .gift-section .wd-product a.add_to_cart_button,
+  html body .gift-section .wd-product .wd-add-btn > a span{
+    font-size:12px !important;
+  }
+  html body .gift-section .wd-product .wd-add-btn > a,
+  html body .gift-section .wd-product a.add_to_cart_button{
+    padding:8px 6px !important;
+  }
+  html body .gift-section .wd-product .product-label,
+  html body .gift-section .wd-product .product-label.out-of-stock{
+    font-size:10px !important;
+    padding:2px 8px !important;
+  }
+}

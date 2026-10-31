@@ -1,0 +1,623 @@
+
+<!-- ==========================================================
+ MOONHOLLOW APOTHECARY — HALLOWEEN SALE TIMER
+ Elementor HTML Widget
+========================================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+/* ========== CUSTOMIZATION SETTINGS ========== */
+window.MH_SALE_CONFIG = {
+  background: "#14091f",
+  accent: "#ff8128",
+  headingColor: "#f1e8d6",
+  textColor: "#b9a9d1",
+  borderColor: "#4a2c6e",
+
+  title: "The Halloween Sale",
+  description: "A little treat for your darker days.",
+  discount: "UP TO $120 OFF",
+
+  // YYYY-MM-DDTHH:MM:SS — visitor's local time
+  endDate: "2026-10-31T23:59:59",
+
+  expiredTitle: "The Sale Has Ended",
+  expiredDescription: "Thank you for being part of our spooky season."
+};
+</script>
+
+<style>
+#sale,
+#sale *,
+#sale *::before,
+#sale *::after {
+  box-sizing: border-box;
+}
+
+#sale {
+  --sale-bg: #14091f;
+  --sale-accent: #ff8128;
+  --sale-heading: #f1e8d6;
+  --sale-text: #b9a9d1;
+  --sale-border: #4a2c6e;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  padding: 82px 22px 86px;
+
+  color: var(--sale-heading);
+  text-align: center;
+  font-family: "Spectral", Georgia, serif;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(123, 70, 168, .22),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(255, 129, 40, .08),
+      transparent 50%
+    ),
+    var(--sale-bg);
+
+  border-top: 1px solid var(--sale-border);
+  border-bottom: 1px solid var(--sale-border);
+}
+
+#sale .sale-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+#sale .sale-glow {
+  position: absolute;
+  z-index: -1;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: .13;
+  pointer-events: none;
+  animation: saleGlow 8s ease-in-out infinite alternate;
+}
+
+#sale .sale-glow.left {
+  top: 8%;
+  left: -150px;
+  background: #b48cff;
+}
+
+#sale .sale-glow.right {
+  right: -150px;
+  bottom: 0;
+  background: #ff8128;
+  animation-delay: -4s;
+}
+
+#sale .sale-spark {
+  position: absolute;
+  z-index: 0;
+  color: var(--sale-accent);
+  opacity: .55;
+  pointer-events: none;
+  animation: saleTwinkle 3s ease-in-out infinite alternate;
+}
+
+#sale .sale-spark.one {
+  top: 20%;
+  left: 12%;
+  font-size: 20px;
+}
+
+#sale .sale-spark.two {
+  top: 24%;
+  right: 13%;
+  font-size: 15px;
+  animation-delay: 1s;
+}
+
+#sale .sale-spark.three {
+  bottom: 18%;
+  left: 19%;
+  font-size: 14px;
+  animation-delay: .6s;
+}
+
+#sale .sale-spark.four {
+  right: 17%;
+  bottom: 17%;
+  font-size: 19px;
+  animation-delay: 1.5s;
+}
+
+/* Heading */
+#sale .sale-title {
+  margin: 0;
+  padding: 0;
+
+  color: var(--sale-heading);
+  font-family: "Pirata One", Georgia, serif;
+  font-size: clamp(44px, 7vw, 74px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: .015em;
+
+  animation: saleRise .8s ease both;
+}
+
+#sale .sale-description {
+  max-width: 570px;
+  margin: 17px auto 0;
+  padding: 0;
+
+  color: var(--sale-text);
+  font-size: 17px;
+  line-height: 1.8;
+
+  animation: saleRise 1s ease both;
+}
+
+/* Discount */
+#sale .sale-discount-wrap {
+  margin: 36px auto 0;
+  animation: saleRise 1.15s ease both;
+}
+
+#sale .sale-discount-label {
+  margin: 0 0 7px;
+  color: var(--sale-text);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+#sale .sale-discount {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+
+  color: var(--sale-accent);
+  font-family: "Pirata One", Georgia, serif;
+  font-size: clamp(43px, 7vw, 67px);
+  font-weight: 400;
+  line-height: 1.18;
+
+  text-shadow:
+    0 0 22px rgba(255, 129, 40, .2),
+    0 0 45px rgba(255, 129, 40, .08);
+
+  animation: salePulse 3s ease-in-out infinite;
+}
+
+/* Small divider */
+#sale .sale-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 26px auto 0;
+  color: var(--sale-accent);
+}
+
+#sale .sale-divider::before,
+#sale .sale-divider::after {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--sale-border);
+}
+
+/* Timer heading */
+#sale .sale-timer-label {
+  margin: 27px 0 15px;
+  color: var(--sale-text);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+/* Countdown boxes */
+#sale .sale-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  max-width: 490px;
+  margin: 0 auto;
+}
+
+#sale .sale-time-box {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  padding: 17px 5px 14px;
+
+  border: 1px solid var(--sale-border);
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(39, 21, 55, .94),
+      rgba(18, 8, 27, .94)
+    );
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, .13),
+    inset 0 1px 0 rgba(255, 255, 255, .03);
+
+  animation: saleBoxFloat 4s ease-in-out infinite;
+}
+
+#sale .sale-time-box:nth-child(2) {
+  animation-delay: -.7s;
+}
+
+#sale .sale-time-box:nth-child(3) {
+  animation-delay: -1.4s;
+}
+
+#sale .sale-time-box:nth-child(4) {
+  animation-delay: -2.1s;
+}
+
+#sale .sale-time-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 22%;
+  right: 22%;
+  height: 1px;
+  background: var(--sale-accent);
+  box-shadow: 0 0 10px var(--sale-accent);
+}
+
+#sale .sale-time-box b {
+  display: block;
+  color: var(--sale-heading);
+
+  font-family: "Pirata One", Georgia, serif;
+  font-size: clamp(31px, 4.5vw, 43px);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+#sale .sale-time-box span {
+  display: block;
+  margin-top: 6px;
+
+  color: var(--sale-text);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* Expired state */
+#sale .sale-ended {
+  display: none;
+  margin: 25px auto 0;
+  max-width: 500px;
+  padding: 18px 16px;
+
+  border: 1px solid var(--sale-border);
+  border-radius: 12px;
+  background: rgba(155, 229, 100, .045);
+}
+
+#sale .sale-ended h3 {
+  margin: 0 0 6px;
+  padding: 0;
+
+  color: #9be564;
+  font-family: "Pirata One", Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+#sale .sale-ended p {
+  margin: 0;
+  color: var(--sale-text);
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes saleRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes salePulse {
+  0%, 100% {
+    text-shadow: 0 0 18px rgba(255, 129, 40, .15);
+  }
+  50% {
+    text-shadow:
+      0 0 28px rgba(255, 129, 40, .32),
+      0 0 48px rgba(255, 129, 40, .12);
+  }
+}
+
+@keyframes saleBoxFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes saleGlow {
+  from { transform: scale(.9); }
+  to { transform: scale(1.12); }
+}
+
+@keyframes saleTwinkle {
+  from {
+    opacity: .2;
+    transform: scale(.8) rotate(0deg);
+  }
+  to {
+    opacity: .75;
+    transform: scale(1.12) rotate(15deg);
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  #sale {
+    padding: 72px 20px;
+  }
+
+  #sale .sale-spark.one { left: 5%; }
+  #sale .sale-spark.two { right: 5%; }
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  #sale {
+    padding: 58px 16px 62px;
+  }
+
+  #sale .sale-title {
+    font-size: clamp(42px, 10.5vw, 55px);
+  }
+
+  #sale .sale-description {
+    max-width: 350px;
+    margin-top: 13px;
+    font-size: 15px;
+  }
+
+  #sale .sale-discount-wrap {
+    margin-top: 28px;
+  }
+
+  #sale .sale-discount {
+    font-size: clamp(39px, 10vw, 51px);
+  }
+
+  #sale .sale-divider {
+    margin-top: 22px;
+  }
+
+  #sale .sale-countdown {
+    gap: 7px;
+  }
+
+  #sale .sale-time-box {
+    padding: 14px 2px 12px;
+    border-radius: 10px;
+  }
+
+  #sale .sale-time-box b {
+    font-size: clamp(27px, 8vw, 35px);
+  }
+
+  #sale .sale-time-box span {
+    font-size: 9px;
+    letter-spacing: .07em;
+  }
+
+  #sale .sale-timer-label {
+    margin-top: 23px;
+    font-size: 10px;
+  }
+
+  #sale .sale-spark.one { left: 3%; top: 10%; }
+  #sale .sale-spark.two { right: 4%; top: 14%; }
+  #sale .sale-spark.three { left: 5%; bottom: 8%; }
+  #sale .sale-spark.four { right: 5%; bottom: 8%; }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  #sale *,
+  #sale *::before,
+  #sale *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+
+<section id="sale" aria-labelledby="saleTitle">
+
+  <div class="sale-glow left" aria-hidden="true"></div>
+  <div class="sale-glow right" aria-hidden="true"></div>
+
+  <span class="sale-spark one" aria-hidden="true">✦</span>
+  <span class="sale-spark two" aria-hidden="true">✧</span>
+  <span class="sale-spark three" aria-hidden="true">✧</span>
+  <span class="sale-spark four" aria-hidden="true">✦</span>
+
+  <div class="sale-inner">
+
+    <!-- Only title and description at the top -->
+    <h2 class="sale-title" id="saleTitle">
+      The Halloween Sale
+    </h2>
+
+    <p class="sale-description" data-sale-description>
+      A little treat for your darker days.
+    </p>
+
+    <!-- Maximum discount -->
+    <div class="sale-discount-wrap">
+      <p class="sale-discount-label">Seasonal savings</p>
+      <div class="sale-discount" data-sale-discount>
+        UP TO $50 OFF
+      </div>
+    </div>
+
+    <div class="sale-divider" aria-hidden="true">✦</div>
+
+    <!-- Countdown -->
+    <p class="sale-timer-label">The spell ends in</p>
+
+    <div class="sale-countdown" data-sale-countdown role="timer" aria-label="Time remaining">
+
+      <div class="sale-time-box">
+        <b data-unit="days">00</b>
+        <span>Days</span>
+      </div>
+
+      <div class="sale-time-box">
+        <b data-unit="hours">00</b>
+        <span>Hours</span>
+      </div>
+
+      <div class="sale-time-box">
+        <b data-unit="minutes">00</b>
+        <span>Minutes</span>
+      </div>
+
+      <div class="sale-time-box">
+        <b data-unit="seconds">00</b>
+        <span>Seconds</span>
+      </div>
+
+    </div>
+
+    <!-- Expired message -->
+    <div class="sale-ended" data-sale-ended aria-live="polite">
+      <h3 data-sale-expired-title>The Sale Has Ended</h3>
+      <p data-sale-expired-description>
+        Thank you for being part of our spooky season.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  function initSaleTimer() {
+    var root = document.getElementById("sale");
+
+    if (!root || root.dataset.saleTimerInitialized === "true") {
+      return;
+    }
+
+    root.dataset.saleTimerInitialized = "true";
+
+    var config = window.MH_SALE_CONFIG || {};
+
+    function setText(selector, value) {
+      var element = root.querySelector(selector);
+      if (element && typeof value === "string") {
+        element.textContent = value;
+      }
+    }
+
+    /* Apply editable content */
+    setText("#saleTitle", config.title);
+    setText("[data-sale-description]", config.description);
+    setText("[data-sale-discount]", config.discount);
+    setText("[data-sale-expired-title]", config.expiredTitle);
+    setText("[data-sale-expired-description]", config.expiredDescription);
+
+    /* Apply editable theme colors */
+    var colors = {
+      "--sale-bg": config.background,
+      "--sale-accent": config.accent,
+      "--sale-heading": config.headingColor,
+      "--sale-text": config.textColor,
+      "--sale-border": config.borderColor
+    };
+
+    Object.keys(colors).forEach(function (key) {
+      if (colors[key]) {
+        root.style.setProperty(key, colors[key]);
+      }
+    });
+
+    var countdown = root.querySelector("[data-sale-countdown]");
+    var timerLabel = root.querySelector(".sale-timer-label");
+    var ended = root.querySelector("[data-sale-ended]");
+
+    var days = root.querySelector('[data-unit="days"]');
+    var hours = root.querySelector('[data-unit="hours"]');
+    var minutes = root.querySelector('[data-unit="minutes"]');
+    var seconds = root.querySelector('[data-unit="seconds"]');
+
+    var endTime = new Date(config.endDate).getTime();
+    var timer = null;
+
+    function updateTimer() {
+      var remaining = endTime - Date.now();
+
+      if (!Number.isFinite(endTime) || remaining <= 0) {
+        countdown.style.display = "none";
+        timerLabel.style.display = "none";
+        ended.style.display = "block";
+
+        if (timer !== null) {
+          clearInterval(timer);
+        }
+        return;
+      }
+
+      ended.style.display = "none";
+      countdown.style.display = "grid";
+      timerLabel.style.display = "block";
+
+      var totalSeconds = Math.floor(remaining / 1000);
+
+      days.textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
+      hours.textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
+      minutes.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+      seconds.textContent = String(totalSeconds % 60).padStart(2, "0");
+    }
+
+    updateTimer();
+    timer = setInterval(updateTimer, 1000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSaleTimer);
+  } else {
+    initSaleTimer();
+  }
+})();
+</script>

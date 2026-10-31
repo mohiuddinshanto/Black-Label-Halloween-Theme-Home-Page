@@ -1,0 +1,882 @@
+
+<!-- ============================================================
+ SECTION 4: THE POTION SHELF — ANIMATED EDITION
+ Elementor > HTML Widget
+ Container CSS ID: shelf
+============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================
+   SHELF SECTION
+============================ */
+#shelf,
+#shelf *,
+#shelf *::before,
+#shelf *::after {
+  box-sizing: border-box;
+}
+
+#shelf {
+  --mh-night: #14091f;
+  --mh-bone: #f1e8d6;
+  --mh-mist: #b9a9d1;
+  --mh-line: #4a2c6e;
+  --mh-slime: #9be564;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  padding: 90px 0 100px;
+
+  color: var(--mh-bone);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(103, 55, 147, .2), transparent 58%),
+    linear-gradient(180deg, #14091f 0%, #190b27 55%, #12081b 100%);
+
+  font-family: "Spectral", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+#shelf * {
+  box-sizing: border-box;
+}
+
+#shelf a {
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Background decoration */
+#shelf .mh-shelf-glow {
+  position: absolute;
+  z-index: -1;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(75px);
+  opacity: .13;
+}
+
+#shelf .mh-shelf-glow.glow-left {
+  left: -170px;
+  top: 20%;
+  background: #a36aff;
+}
+
+#shelf .mh-shelf-glow.glow-right {
+  right: -170px;
+  top: 35%;
+  background: #ff7a1a;
+}
+
+#shelf .mh-shelf-wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================
+   SECTION HEADING
+============================ */
+#shelf .mh-shelf-heading {
+  max-width: 700px;
+  margin: 0 auto 52px;
+  text-align: center;
+  animation: mhShelfFadeUp .9s ease both;
+}
+
+#shelf .mh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin: 0 0 15px;
+  color: var(--mh-slime);
+
+  font-family: "Spectral", Georgia, serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+#shelf .mh-eyebrow::before,
+#shelf .mh-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  opacity: .7;
+}
+
+#shelf .mh-shelf-title {
+  margin: 0 0 16px;
+  padding: 0;
+
+  color: var(--mh-bone);
+  font-family: "Pirata One", Georgia, serif;
+  font-size: clamp(42px, 6vw, 68px);
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1.08;
+
+  text-shadow: 0 0 28px rgba(180, 140, 255, .15);
+}
+
+#shelf .mh-shelf-title span {
+  color: #c8a4ff;
+}
+
+#shelf .mh-lead {
+  max-width: 550px;
+  margin: 0 auto;
+
+  color: var(--mh-mist);
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+/* Small decorative divider */
+#shelf .mh-shelf-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 24px auto 0;
+  color: #c8a4ff;
+}
+
+#shelf .mh-shelf-divider::before,
+#shelf .mh-shelf-divider::after {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #75539b);
+}
+
+#shelf .mh-shelf-divider::after {
+  transform: rotate(180deg);
+}
+
+#shelf .mh-shelf-divider span {
+  font-size: 17px;
+  line-height: 1;
+}
+
+/* ============================
+   BOTTLE GRID
+============================ */
+#shelf .mh-bottles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* ============================
+   BOTTLE CARD
+============================ */
+#shelf .mh-bottle {
+  --c: #b48cff;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  min-width: 0;
+  min-height: 290px;
+  padding: 27px 14px 23px;
+
+  color: var(--mh-bone);
+  text-align: center;
+
+  border: 1px solid rgba(180, 140, 255, .23);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(155deg, rgba(65, 37, 85, .35), rgba(19, 8, 30, .86));
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .035),
+    0 12px 32px rgba(0, 0, 0, .13);
+
+  opacity: 0;
+  transform: translateY(25px);
+  animation: mhBottleAppear .8s cubic-bezier(.2, .7, .25, 1) forwards;
+
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+}
+
+#shelf .mh-bottle:nth-child(1) { animation-delay: .08s; }
+#shelf .mh-bottle:nth-child(2) { animation-delay: .18s; }
+#shelf .mh-bottle:nth-child(3) { animation-delay: .28s; }
+#shelf .mh-bottle:nth-child(4) { animation-delay: .38s; }
+#shelf .mh-bottle:nth-child(5) { animation-delay: .48s; }
+
+/* Colored glow inside each card */
+#shelf .mh-bottle::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50px;
+
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+
+  background: var(--c);
+  opacity: .09;
+  filter: blur(42px);
+  transform: translateX(-50%);
+
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+/* Subtle shine */
+#shelf .mh-bottle::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -65%;
+
+  width: 45%;
+  height: 250%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, .09),
+    transparent
+  );
+
+  transform: rotate(24deg);
+  transition: left .65s ease;
+  pointer-events: none;
+}
+
+#shelf .mh-bottle:hover {
+  transform: translateY(-9px);
+  border-color: var(--c);
+
+  background:
+    linear-gradient(155deg, rgba(65, 37, 85, .55), rgba(19, 8, 30, .94));
+
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, .23),
+    0 0 24px color-mix(in srgb, var(--c) 17%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, .05);
+
+  color: var(--mh-bone);
+}
+
+#shelf .mh-bottle:hover::before {
+  opacity: .2;
+  transform: translateX(-50%) scale(1.3);
+}
+
+#shelf .mh-bottle:hover::after {
+  left: 130%;
+}
+
+#shelf .mh-bottle:focus-visible {
+  outline: 3px solid var(--mh-slime);
+  outline-offset: 5px;
+}
+
+/* ============================
+   BOTTLE ART
+============================ */
+#shelf .mh-bottle-art {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 115px;
+  height: 142px;
+  margin: 0 auto 14px;
+  flex-shrink: 0;
+}
+
+#shelf .mh-bottle-art::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 7px;
+  left: 50%;
+
+  width: 74px;
+  height: 20px;
+  border-radius: 50%;
+
+  background: var(--c);
+  opacity: .15;
+  filter: blur(14px);
+  transform: translateX(-50%);
+
+  transition: opacity .35s ease;
+}
+
+#shelf .mh-bottle:hover .mh-bottle-art::before {
+  opacity: .35;
+}
+
+#shelf .mh-potion-svg {
+  position: relative;
+  z-index: 1;
+
+  width: 94px;
+  height: 134px;
+  overflow: visible;
+
+  color: var(--c);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--c) 25%, transparent));
+
+  transform-origin: 50% 85%;
+  animation: mhPotionFloat 3.8s ease-in-out infinite;
+
+  transition: filter .35s ease;
+}
+
+#shelf .mh-bottle:nth-child(2) .mh-potion-svg {
+  animation-delay: -.8s;
+}
+
+#shelf .mh-bottle:nth-child(3) .mh-potion-svg {
+  animation-delay: -1.5s;
+}
+
+#shelf .mh-bottle:nth-child(4) .mh-potion-svg {
+  animation-delay: -2.2s;
+}
+
+#shelf .mh-bottle:nth-child(5) .mh-potion-svg {
+  animation-delay: -1.1s;
+}
+
+#shelf .mh-bottle:hover .mh-potion-svg {
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--c) 55%, transparent));
+}
+
+/* Moving liquid inside the potion */
+#shelf .mh-liquid {
+  animation: mhLiquidMove 3.4s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+#shelf .mh-bottle:nth-child(even) .mh-liquid {
+  animation-delay: -.9s;
+}
+
+/* Bubbles rise inside bottles */
+#shelf .mh-bubble {
+  animation: mhBubbleRise 2.8s ease-in infinite;
+}
+
+#shelf .mh-bubble.b2 {
+  animation-delay: .9s;
+}
+
+#shelf .mh-bubble.b3 {
+  animation-delay: 1.7s;
+}
+
+/* ============================
+   CARD TEXT
+============================ */
+#shelf .mh-bottle h3 {
+  margin: 0 0 7px;
+  padding: 0;
+
+  color: var(--mh-bone);
+  font-family: "Pirata One", Georgia, serif;
+  font-size: 29px;
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1.12;
+
+  transition: color .3s ease;
+}
+
+#shelf .mh-bottle:hover h3 {
+  color: var(--c);
+}
+
+#shelf .mh-bottle .mh-bottle-desc {
+  display: block;
+  max-width: 180px;
+  margin: 0 auto;
+
+  color: var(--mh-mist);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+#shelf .mh-bottle .mh-bottle-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 17px;
+  padding-top: 12px;
+
+  border-top: 1px solid rgba(185, 169, 209, .15);
+
+  color: var(--c);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+
+  transition: gap .3s ease;
+}
+
+#shelf .mh-bottle:hover .mh-bottle-link {
+  gap: 11px;
+}
+
+#shelf .mh-bottle-link .mh-arrow {
+  font-size: 16px;
+}
+
+/* ============================
+   ANIMATIONS
+============================ */
+@keyframes mhShelfFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mhBottleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mhPotionFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1deg);
+  }
+}
+
+@keyframes mhLiquidMove {
+  0% {
+    transform: translateX(-1px) skewY(-2deg);
+  }
+  100% {
+    transform: translateX(1px) skewY(2deg);
+  }
+}
+
+@keyframes mhBubbleRise {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(.7);
+  }
+  20% {
+    opacity: .7;
+  }
+  80% {
+    opacity: .6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-19px) scale(1.15);
+  }
+}
+
+/* ============================
+   TABLET
+============================ */
+@media (max-width: 1024px) {
+  #shelf {
+    padding: 75px 0 82px;
+  }
+
+  #shelf .mh-bottles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  #shelf .mh-bottle {
+    min-height: 280px;
+  }
+
+  #shelf .mh-bottle:nth-child(4) {
+    grid-column: 1 / 2;
+  }
+
+  #shelf .mh-shelf-heading {
+    margin-bottom: 42px;
+  }
+}
+
+/* ============================
+   MOBILE
+============================ */
+@media (max-width: 600px) {
+  #shelf {
+    padding: 62px 0 70px;
+  }
+
+  #shelf .mh-shelf-wrap {
+    padding: 0 16px;
+  }
+
+  #shelf .mh-shelf-heading {
+    margin-bottom: 32px;
+  }
+
+  #shelf .mh-eyebrow {
+    font-size: 10px;
+    letter-spacing: .16em;
+  }
+
+  #shelf .mh-shelf-title {
+    font-size: clamp(39px, 10vw, 52px);
+    line-height: 1.1;
+  }
+
+  #shelf .mh-lead {
+    max-width: 350px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  #shelf .mh-bottles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  #shelf .mh-bottle {
+    min-height: 255px;
+    padding: 20px 9px 18px;
+    border-radius: 15px;
+  }
+
+  #shelf .mh-bottle:nth-child(4) {
+    grid-column: auto;
+  }
+
+  #shelf .mh-bottle-art {
+    width: 90px;
+    height: 119px;
+    margin-bottom: 10px;
+  }
+
+  #shelf .mh-potion-svg {
+    width: 78px;
+    height: 112px;
+  }
+
+  #shelf .mh-bottle h3 {
+    font-size: 25px;
+  }
+
+  #shelf .mh-bottle .mh-bottle-desc {
+    font-size: 12px;
+  }
+
+  #shelf .mh-bottle .mh-bottle-link {
+    margin-top: 13px;
+    padding-top: 10px;
+    font-size: 10px;
+    letter-spacing: .06em;
+  }
+}
+
+@media (max-width: 350px) {
+  #shelf .mh-bottles {
+    gap: 9px;
+  }
+
+  #shelf .mh-bottle {
+    padding-inline: 7px;
+  }
+
+  #shelf .mh-bottle h3 {
+    font-size: 22px;
+  }
+
+  #shelf .mh-bottle .mh-bottle-desc {
+    font-size: 11px;
+  }
+}
+
+/* Respect visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #shelf *,
+  #shelf *::before,
+  #shelf *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  #shelf .mh-bottle {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+
+<!-- Shared potion SVG symbol -->
+<svg width="0" height="0"
+     style="position:absolute;overflow:hidden"
+     aria-hidden="true"
+     focusable="false">
+  <symbol id="mhPotion" viewBox="0 0 84 120">
+
+    <!-- Cork -->
+    <rect x="31" y="2" width="22" height="12" rx="3" fill="#6b4a2b"/>
+    <path d="M34 5h16" stroke="#c29b64" stroke-width="1.5" opacity=".65"/>
+
+    <!-- Bottle glass -->
+    <path
+      d="M34 14h16v18c14 8 26 22 26 48
+         0 22-12 36-34 36S8 102 8 80
+         c0-26 12-40 26-48z"
+      fill="rgba(241,232,214,.10)"
+      stroke="#f1e8d6"
+      stroke-width="2.5"
+    />
+
+    <!-- Liquid -->
+    <path
+      class="mh-liquid"
+      d="M12 76c10-6 20 6 30 0s20 6 30 0
+         c1 4 2 8 2 12 0 18-10 28-32 28
+         S12 106 12 88c0-4 0-8 0-12z"
+      fill="currentColor"
+    />
+
+    <!-- Glass reflection -->
+    <path
+      d="M22 47c-6 11-8 22-6 33"
+      fill="none"
+      stroke="rgba(255,255,255,.55)"
+      stroke-width="3"
+      stroke-linecap="round"
+    />
+
+    <!-- Bubbles -->
+    <circle class="mh-bubble b1" cx="30" cy="92" r="4"
+      fill="rgba(255,255,255,.7)"/>
+    <circle class="mh-bubble b2" cx="52" cy="84" r="3"
+      fill="rgba(255,255,255,.65)"/>
+    <circle class="mh-bubble b3" cx="43" cy="103" r="2.5"
+      fill="rgba(255,255,255,.6)"/>
+  </symbol>
+</svg>
+
+<section id="shelf" class="mh-shelf" aria-labelledby="mhShelfTitle">
+
+  <div class="mh-shelf-glow glow-left" aria-hidden="true"></div>
+  <div class="mh-shelf-glow glow-right" aria-hidden="true"></div>
+
+  <div class="mh-shelf-wrap">
+
+    <!-- Heading -->
+    <header class="mh-shelf-heading">
+      <p class="mh-eyebrow">A little magic, a little mystery</p>
+
+      <h2 class="mh-shelf-title" id="mhShelfTitle">
+        The <span>Potion Shelf</span>
+      </h2>
+
+      <p class="mh-lead">
+        Pick the bottle that matches what’s haunting you.
+        Find your next favorite from our curious collection.
+      </p>
+
+      <div class="mh-shelf-divider" aria-hidden="true">
+        <span>✦</span>
+      </div>
+    </header>
+
+    <!-- Potion cards -->
+    <div class="mh-bottles">
+
+      <!-- Anxiety -->
+      <a
+        class="mh-bottle"
+        href="https://blacklabelpharma.com/product-category/anxiety-pills/"
+        data-f="Anxiety"
+        style="--c:#b48cff"
+        aria-label="Explore the Anxiety collection"
+      >
+        <div class="mh-bottle-art" aria-hidden="true">
+          <svg class="mh-potion-svg" viewBox="0 0 84 120">
+            <use href="#mhPotion"></use>
+          </svg>
+        </div>
+
+        <h3>Anxiety</h3>
+        <span class="mh-bottle-desc">Calm the restless mind</span>
+
+        <span class="mh-bottle-link">
+          Explore <span class="mh-arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <!-- Pain Relief -->
+      <a
+        class="mh-bottle"
+        href="https://blacklabelpharma.com/product-category/pain-relief/"
+        data-f="Pain Relief"
+        style="--c:#ff5f6d"
+        aria-label="Explore the Pain Relief collection"
+      >
+        <div class="mh-bottle-art" aria-hidden="true">
+          <svg class="mh-potion-svg" viewBox="0 0 84 120">
+            <use href="#mhPotion"></use>
+          </svg>
+        </div>
+
+        <h3>Pain Relief</h3>
+        <span class="mh-bottle-desc">Ease the aches</span>
+
+        <span class="mh-bottle-link">
+          Explore <span class="mh-arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <!-- Sleeping -->
+      <a
+        class="mh-bottle"
+        href="https://blacklabelpharma.com/product-category/sleeping-pills/"
+        data-f="Sleeping"
+        style="--c:#5ec4ff"
+        aria-label="Explore the Sleeping collection"
+      >
+        <div class="mh-bottle-art" aria-hidden="true">
+          <svg class="mh-potion-svg" viewBox="0 0 84 120">
+            <use href="#mhPotion"></use>
+          </svg>
+        </div>
+
+        <h3>Sleeping</h3>
+        <span class="mh-bottle-desc">Drift off, rest deep</span>
+
+        <span class="mh-bottle-link">
+          Explore <span class="mh-arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <!-- Saxaul -->
+      <a
+        class="mh-bottle"
+        href="https://blacklabelpharma.com/product-category/sexual-pills/"
+        data-f="Saxaul"
+        style="--c:#ff7a1a"
+        aria-label="Explore the Saxaul collection"
+      >
+        <div class="mh-bottle-art" aria-hidden="true">
+          <svg class="mh-potion-svg" viewBox="0 0 84 120">
+            <use href="#mhPotion"></use>
+          </svg>
+        </div>
+
+        <h3>Saxaul</h3>
+        <span class="mh-bottle-desc">The desert-wood range</span>
+
+        <span class="mh-bottle-link">
+          Explore <span class="mh-arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+      <!-- ADHD -->
+      <a
+        class="mh-bottle"
+        href="https://blacklabelpharma.com/product-category/adhd-pills/"
+        data-f="ADHD"
+        style="--c:#9be564"
+        aria-label="Explore the ADHD collection"
+      >
+        <div class="mh-bottle-art" aria-hidden="true">
+          <svg class="mh-potion-svg" viewBox="0 0 84 120">
+            <use href="#mhPotion"></use>
+          </svg>
+        </div>
+
+        <h3>ADHD</h3>
+        <span class="mh-bottle-desc">Support for focus</span>
+
+        <span class="mh-bottle-link">
+          Explore <span class="mh-arrow" aria-hidden="true">→</span>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  function initPotionShelf() {
+    var shelf = document.getElementById("shelf");
+    if (!shelf || shelf.dataset.mhShelfInitialized === "true") return;
+
+    shelf.dataset.mhShelfInitialized = "true";
+
+    shelf.querySelectorAll(".mh-bottle").forEach(function (bottle) {
+      bottle.addEventListener("click", function () {
+        var filter = bottle.getAttribute("data-f");
+
+        /*
+         * Keep the selected category available for Section 5.
+         * Dispatch the event before the browser follows the link.
+         */
+        window.mhFilterRequest = filter;
+
+        window.dispatchEvent(
+          new CustomEvent("mh-filter", {
+            detail: filter
+          })
+        );
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initPotionShelf);
+  } else {
+    initPotionShelf();
+  }
+})();
+</script>

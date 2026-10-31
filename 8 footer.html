@@ -1,0 +1,832 @@
+
+<!-- ============================================================
+ MOONHOLLOW APOTHECARY — HALLOWEEN FOOTER
+ Elementor > HTML Widget
+============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================
+   FOOTER BASE & THEME
+============================ */
+.mh-footer,
+.mh-footer *,
+.mh-footer *::before,
+.mh-footer *::after {
+  box-sizing: border-box;
+}
+
+.mh-footer {
+  --mh-deep: #0b0414;
+  --mh-night: #14091f;
+  --mh-pumpkin: #ff7a1a;
+  --mh-slime: #9be564;
+  --mh-bone: #f1e8d6;
+  --mh-mist: #b9a9d1;
+  --mh-line: #4a2c6e;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  padding: 72px 0 0;
+
+  color: var(--mh-mist);
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(117, 54, 166, .19), transparent 40%),
+    radial-gradient(ellipse at 90% 45%, rgba(255, 122, 26, .08), transparent 38%),
+    linear-gradient(180deg, var(--mh-night), var(--mh-deep) 85%);
+
+  font-family: "Spectral", Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.mh-footer * {
+  box-sizing: border-box;
+}
+
+.mh-footer a {
+  color: var(--mh-mist);
+  text-decoration: none;
+  transition:
+    color .25s ease,
+    transform .25s ease,
+    text-shadow .25s ease;
+}
+
+.mh-footer a:hover {
+  color: var(--mh-pumpkin);
+  text-shadow: 0 0 13px rgba(255, 122, 26, .25);
+}
+
+.mh-footer a:focus-visible {
+  outline: 3px solid var(--mh-slime);
+  outline-offset: 4px;
+}
+
+.mh-footer p {
+  margin: 0 0 12px;
+}
+
+.mh-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mh-footer li {
+  margin: 0 0 11px;
+}
+
+.mh-footer b {
+  color: var(--mh-bone);
+  font-weight: 600;
+}
+
+.mh-footer-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================
+   SPOOKY BACKGROUND GLOW
+============================ */
+.mh-footer .mh-footer-glow {
+  position: absolute;
+  z-index: -1;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: .15;
+  pointer-events: none;
+  animation: mhFooterGlow 9s ease-in-out infinite alternate;
+}
+
+.mh-footer .mh-footer-glow-left {
+  top: 8%;
+  left: -150px;
+  background: #a76aff;
+}
+
+.mh-footer .mh-footer-glow-right {
+  top: 35%;
+  right: -150px;
+  background: var(--mh-pumpkin);
+  animation-delay: -4s;
+}
+
+.mh-footer .mh-footer-stars {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mh-footer .mh-footer-star {
+  position: absolute;
+  color: var(--mh-pumpkin);
+  opacity: .55;
+  animation: mhFooterTwinkle 3s ease-in-out infinite alternate;
+}
+
+.mh-footer .mh-footer-star.s1 {
+  top: 12%;
+  left: 8%;
+  font-size: 19px;
+}
+
+.mh-footer .mh-footer-star.s2 {
+  top: 29%;
+  right: 7%;
+  font-size: 15px;
+  animation-delay: .8s;
+}
+
+.mh-footer .mh-footer-star.s3 {
+  top: 61%;
+  left: 4%;
+  font-size: 13px;
+  animation-delay: 1.4s;
+}
+
+.mh-footer .mh-footer-star.s4 {
+  top: 67%;
+  right: 5%;
+  font-size: 20px;
+  animation-delay: .4s;
+}
+
+/* ============================
+   FLYING BATS
+============================ */
+.mh-footer .mh-bat-flight {
+  position: absolute;
+  z-index: 1;
+  top: 23px;
+  left: -100px;
+  width: 54px;
+  height: 28px;
+  fill: #05020b;
+  opacity: .9;
+  pointer-events: none;
+  animation: mhFooterBatFlight 19s linear infinite;
+}
+
+.mh-footer .mh-bat-flight.bat-two {
+  top: 44px;
+  width: 35px;
+  animation-duration: 24s;
+  animation-delay: -8s;
+  opacity: .7;
+}
+
+.mh-footer .mh-bat-flight.bat-three {
+  top: 62px;
+  width: 43px;
+  animation-duration: 22s;
+  animation-delay: -14s;
+  opacity: .75;
+}
+
+/* ============================
+   HALLOWEEN TOP DIVIDER
+============================ */
+.mh-footer .mh-halloween-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 auto 45px;
+  color: var(--mh-pumpkin);
+  font-size: 18px;
+  letter-spacing: .2em;
+}
+
+.mh-footer .mh-halloween-divider::before,
+.mh-footer .mh-halloween-divider::after {
+  content: "";
+  display: block;
+  width: min(150px, 22vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mh-line), var(--mh-pumpkin));
+}
+
+.mh-footer .mh-halloween-divider::after {
+  transform: rotate(180deg);
+}
+
+/* ============================
+   MAIN GRID
+============================ */
+.mh-footer .mh-fgrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.5fr;
+  gap: 0;
+}
+
+.mh-footer .mh-fcol {
+  min-width: 0;
+  padding: 0 25px;
+  border-left: 1px solid rgba(74, 44, 110, .75);
+}
+
+.mh-footer .mh-fcol:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.mh-footer .mh-fcol:last-child {
+  padding-right: 0;
+}
+
+/* ============================
+   BRAND
+============================ */
+.mh-footer .mh-fbrand {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 0;
+
+  color: var(--mh-pumpkin);
+  font-family: "Pirata One", Georgia, serif;
+  font-size: clamp(29px, 3vw, 36px);
+  font-weight: 400;
+  letter-spacing: .02em;
+  line-height: 1.1;
+
+  text-shadow:
+    0 0 10px rgba(255, 122, 26, .4),
+    0 0 28px rgba(255, 122, 26, .13);
+
+  animation: mhFooterBrandGlow 4s ease-in-out infinite alternate;
+}
+
+.mh-footer .mh-brand-mark {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--mh-slime);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.mh-footer .mh-brand-copy {
+  max-width: 300px;
+  color: var(--mh-mist);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+/* ============================
+   SECTION HEADINGS
+============================ */
+.mh-footer h4 {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 23px;
+  padding: 0 0 10px;
+
+  color: var(--mh-bone);
+  font-family: "Pirata One", Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: .025em;
+  line-height: 1.2;
+}
+
+.mh-footer h4::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--mh-pumpkin);
+  box-shadow: 0 0 10px rgba(255, 122, 26, .4);
+  transition: width .3s ease;
+}
+
+.mh-footer .mh-fcol:hover h4::after {
+  width: 56px;
+}
+
+/* ============================
+   MENU & CATEGORY LINKS
+============================ */
+.mh-footer .mh-fcol ul a {
+  position: relative;
+  display: inline-block;
+  padding-left: 0;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.mh-footer .mh-fcol ul a::before {
+  content: "✧";
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--mh-pumpkin);
+  font-size: 11px;
+  opacity: .65;
+  transition:
+    transform .25s ease,
+    opacity .25s ease;
+}
+
+.mh-footer .mh-fcol ul a:hover::before {
+  transform: rotate(45deg) scale(1.3);
+  opacity: 1;
+}
+
+/* ============================
+   CONTACT
+============================ */
+.mh-footer .mh-contact li {
+  margin-bottom: 15px;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.mh-footer .mh-contact b {
+  color: var(--mh-bone);
+}
+
+.mh-footer .mh-contact a {
+  overflow-wrap: anywhere;
+}
+
+/* ============================
+   PAYMENT AREA
+============================ */
+.mh-footer .mh-pay-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 23px 0 12px;
+
+  color: var(--mh-bone);
+  font-family: "Pirata One", Georgia, serif;
+  font-size: 21px;
+  letter-spacing: .02em;
+}
+
+.mh-footer .mh-pay-title svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  fill: var(--mh-slime);
+}
+
+.mh-footer .mh-pay {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+}
+
+.mh-footer .mh-pay svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  transition:
+    transform .25s ease,
+    filter .25s ease;
+}
+
+.mh-footer .mh-pay svg:hover {
+  transform: translateY(-4px) scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(255, 122, 26, .25));
+}
+
+/* ============================
+   BOTTOM LEGAL BAR
+============================ */
+.mh-footer .mh-legal {
+  position: relative;
+  margin-top: 48px;
+  padding: 25px 0 28px;
+  border-top: 1px solid var(--mh-line);
+  text-align: center;
+}
+
+.mh-footer .mh-legal::before {
+  content: "✦  ☾  ✦";
+  display: block;
+  margin: -38px auto 20px;
+  width: max-content;
+  padding: 0 15px;
+  background: var(--mh-deep);
+  color: var(--mh-pumpkin);
+  font-size: 15px;
+  letter-spacing: .22em;
+}
+
+.mh-footer .mh-legal p {
+  max-width: 850px;
+  margin: 0 auto 10px;
+  color: #9685ad;
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+.mh-footer .mh-legal p:last-child {
+  margin-top: 14px;
+  color: var(--mh-mist);
+  font-size: 13px;
+}
+
+/* ============================
+   CSS PUMPKIN DECORATIONS
+============================ */
+.mh-footer .mh-pumpkin-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 42px auto 0;
+  pointer-events: none;
+}
+
+.mh-footer .mh-pumpkin {
+  position: relative;
+  width: 42px;
+  height: 31px;
+  border-radius: 48% 48% 43% 43%;
+  background: linear-gradient(135deg, #ff9b36, #e95b0b 75%);
+  box-shadow:
+    inset -5px -2px 0 rgba(106, 30, 0, .16),
+    0 0 20px rgba(255, 122, 26, .13);
+  animation: mhPumpkinFloat 3.5s ease-in-out infinite;
+}
+
+.mh-footer .mh-pumpkin::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: -7px;
+  width: 7px;
+  height: 11px;
+  border-radius: 3px 3px 1px 1px;
+  background: #627a36;
+  transform: rotate(8deg);
+}
+
+.mh-footer .mh-pumpkin::after {
+  content: "•";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5px;
+  color: #371208;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 4px;
+  text-shadow: 5px 0 #371208;
+}
+
+.mh-footer .mh-pumpkin.p2 {
+  width: 31px;
+  height: 24px;
+  transform: scale(.85);
+  animation-delay: -1.4s;
+}
+
+.mh-footer .mh-pumpkin.p3 {
+  width: 35px;
+  height: 27px;
+  animation-delay: -2.2s;
+}
+
+/* ============================
+   ANIMATIONS
+============================ */
+@keyframes mhFooterBrandGlow {
+  from {
+    text-shadow: 0 0 8px rgba(255, 122, 26, .28);
+  }
+  to {
+    text-shadow:
+      0 0 15px rgba(255, 122, 26, .48),
+      0 0 28px rgba(255, 122, 26, .18);
+  }
+}
+
+@keyframes mhFooterGlow {
+  from { transform: scale(.9) translateY(0); }
+  to { transform: scale(1.12) translateY(-15px); }
+}
+
+@keyframes mhFooterTwinkle {
+  from { opacity: .2; transform: scale(.8) rotate(0); }
+  to { opacity: .85; transform: scale(1.15) rotate(18deg); }
+}
+
+@keyframes mhFooterBatFlight {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  45% {
+    transform: translateX(55vw) translateY(-15px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 180px)) translateY(8px);
+  }
+}
+
+@keyframes mhPumpkinFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+/* ============================
+   TABLET
+============================ */
+@media (max-width: 900px) {
+  .mh-footer {
+    padding-top: 60px;
+  }
+
+  .mh-footer .mh-fgrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 0;
+  }
+
+  .mh-footer .mh-fcol {
+    padding: 0 24px;
+  }
+
+  .mh-footer .mh-fcol:first-child {
+    grid-column: 1 / -1;
+    padding: 0 0 26px;
+    border-bottom: 1px solid var(--mh-line);
+  }
+
+  .mh-footer .mh-fcol:nth-child(2),
+  .mh-footer .mh-fcol:nth-child(4) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .mh-footer .mh-fcol:nth-child(3) {
+    padding-right: 0;
+  }
+
+  .mh-footer .mh-brand-copy {
+    max-width: 500px;
+  }
+}
+
+/* ============================
+   MOBILE
+============================ */
+@media (max-width: 560px) {
+  .mh-footer {
+    padding-top: 48px;
+  }
+
+  .mh-footer-wrap {
+    padding: 0 20px;
+  }
+
+  .mh-footer .mh-halloween-divider {
+    margin-bottom: 34px;
+  }
+
+  .mh-footer .mh-fgrid {
+    grid-template-columns: 1fr;
+    gap: 31px;
+  }
+
+  .mh-footer .mh-fcol,
+  .mh-footer .mh-fcol:first-child,
+  .mh-footer .mh-fcol:nth-child(2),
+  .mh-footer .mh-fcol:nth-child(3),
+  .mh-footer .mh-fcol:nth-child(4) {
+    grid-column: auto;
+    padding: 0;
+    border: 0;
+  }
+
+  .mh-footer .mh-fcol:first-child {
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--mh-line);
+  }
+
+  .mh-footer .mh-fbrand {
+    font-size: 33px;
+  }
+
+  .mh-footer h4 {
+    margin-bottom: 17px;
+  }
+
+  .mh-footer .mh-fcol li {
+    margin-bottom: 10px;
+  }
+
+  .mh-footer .mh-contact li {
+    margin-bottom: 13px;
+  }
+
+  .mh-footer .mh-pay svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mh-footer .mh-legal {
+    margin-top: 38px;
+    padding-bottom: 25px;
+  }
+
+  .mh-footer .mh-legal p {
+    font-size: 11px;
+  }
+
+  .mh-footer .mh-footer-star.s1 { left: 3%; }
+  .mh-footer .mh-footer-star.s2 { right: 3%; }
+}
+
+/* Respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .mh-footer *,
+  .mh-footer *::before,
+  .mh-footer *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+
+<footer class="mh-footer">
+
+  <!-- Background effects -->
+  <div class="mh-footer-glow mh-footer-glow-left" aria-hidden="true"></div>
+  <div class="mh-footer-glow mh-footer-glow-right" aria-hidden="true"></div>
+
+  <div class="mh-footer-stars" aria-hidden="true">
+    <span class="mh-footer-star s1">✦</span>
+    <span class="mh-footer-star s2">✧</span>
+    <span class="mh-footer-star s3">✧</span>
+    <span class="mh-footer-star s4">✦</span>
+  </div>
+
+  <!-- Flying bats -->
+  <svg class="mh-bat-flight bat-one" viewBox="0 0 60 30" aria-hidden="true">
+    <path d="M30 7l4 7 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 10l14 6-2-10 10 8z"/>
+  </svg>
+
+  <svg class="mh-bat-flight bat-two" viewBox="0 0 60 30" aria-hidden="true">
+    <path d="M30 7l4 7 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 10l14 6-2-10 10 8z"/>
+  </svg>
+
+  <svg class="mh-bat-flight bat-three" viewBox="0 0 60 30" aria-hidden="true">
+    <path d="M30 7l4 7 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 10l14 6-2-10 10 8z"/>
+  </svg>
+
+  <div class="mh-footer-wrap">
+
+    <!-- Halloween ornament -->
+    <div class="mh-halloween-divider" aria-hidden="true">
+      <span>☾</span>
+      <span>THE WITCHING HOUR</span>
+      <span>✦</span>
+    </div>
+
+    <div class="mh-fgrid">
+
+      <!-- BRAND -->
+      <div class="mh-fcol">
+        <span class="mh-brand-mark">✦A little magic in every bottle✦</span>
+
+        <div class="mh-fbrand">Black Label Pharma</div>
+
+        <p class="mh-brand-copy">
+          Natural herbal wellness products for calm, sleep, comfort and focus.
+          Small batches, honest labels, quiet delivery.
+        </p>
+      </div>
+
+      <!-- MENU -->
+      <div class="mh-fcol">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="https://blacklabelpharma.com/">Home</a></li>
+          <li><a href="https://blacklabelpharma.com/shop/">Shop</a></li>
+          <li><a href="https://blacklabelpharma.com/about-us/">About Us</a></li>
+          <li><a href="https://blacklabelpharma.com/contact-us/">Contact Us</a></li>
+          <li><a href="https://blacklabelpharma.com/return-refund-policy/">Refund Policy</a></li>
+          <li><a href="https://blacklabelpharma.com/crypto-address/">Crypto Address</a></li>
+        </ul>
+      </div>
+
+      <!-- CATEGORIES -->
+      <div class="mh-fcol">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="https://blacklabelpharma.com/product-category/adhd-pills/">ADHD</a></li>
+          <li><a href="https://blacklabelpharma.com/product-category/anxiety-pills/">Anxiety</a></li>
+          <li><a href="https://blacklabelpharma.com/product-category/pain-relief/">Pain Relief</a></li>
+          <li><a href="https://blacklabelpharma.com/product-category/sleeping-pills/">Sleeping</a></li>
+          <li><a href="https://blacklabelpharma.com/product-category/sexual-pills/">Saxaul</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="mh-fcol">
+        <h4>Contact</h4>
+
+        <ul class="mh-contact">
+          <li>
+            <b>WhatsApp:</b><br>
+            <a href="https://wa.me/19454022445">+1 (945) 402-2445</a>
+          </li>
+
+          <li>
+            <b>Email:</b><br>
+            <a href="mailto:blacklabelpharma25@gmail.com">blacklabelpharma25@gmail.com</a>
+          </li>
+
+          <li>
+            <b>Address:</b><br>
+            DENTON, TX 76201, LAS VEGAS, NV 89148
+          </li>
+        </ul>
+
+        <div class="mh-pay-title">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 1a3.5 3.5 0 0 0-3.5 3.5V6H4a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-.5V4.5A3.5 3.5 0 0 0 8 1zm-2 3.5a2 2 0 1 1 4 0V6H6z"/>
+          </svg>
+          Safe payments
+        </div>
+
+        <div class="mh-pay">
+          <svg viewBox="0 0 44 44" role="img" aria-label="Bitcoin">
+            <title>Bitcoin</title>
+            <circle cx="22" cy="22" r="20" fill="#f7931a"/>
+            <text x="22" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="24" fill="#1a1000">&#8383;</text>
+          </svg>
+
+          <svg viewBox="0 0 44 44" role="img" aria-label="Tether USDT">
+            <title>Tether USDT</title>
+            <circle cx="22" cy="22" r="20" fill="#50af95"/>
+            <path d="M12 12h20v5h-7.5v3.4c5 .3 8.5 1.3 8.5 2.6s-3.5 2.3-8.5 2.6V34h-5v-8.4c-5-.3-8.5-1.3-8.5-2.6s3.5-2.3 8.5-2.6V17H12z" fill="#fff"/>
+          </svg>
+
+          <svg viewBox="0 0 44 44" role="img" aria-label="Cash App">
+            <title>Cash App</title>
+            <rect x="2" y="2" width="40" height="40" rx="9" fill="#00d64f"/>
+            <text x="22" y="33" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="30" fill="#0a0a0a">$</text>
+          </svg>
+
+          <svg viewBox="0 0 44 44" role="img" aria-label="Zcash">
+            <title>Zcash</title>
+            <rect x="2" y="2" width="40" height="40" rx="9" fill="#6a1fd0"/>
+            <text x="22" y="32" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="28" fill="#f4b728">Z</text>
+          </svg>
+
+          <svg viewBox="0 0 44 44" role="img" aria-label="Venmo">
+            <title>Venmo</title>
+            <rect x="2" y="2" width="40" height="40" rx="9" fill="#3d95ce"/>
+            <text x="22" y="32" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-style="italic" font-size="28" fill="#fff">V</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Floating pumpkins -->
+    <div class="mh-pumpkin-row" aria-hidden="true">
+      <span class="mh-pumpkin p2"></span>
+      <span class="mh-pumpkin"></span>
+      <span class="mh-pumpkin p3"></span>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="mh-legal">
+   
+
+      <p>
+        &copy; Copyright © 2026 | Black Label Pharma. Happy Halloween.
+      </p>
+    </div>
+
+  </div>
+  
+</footer>

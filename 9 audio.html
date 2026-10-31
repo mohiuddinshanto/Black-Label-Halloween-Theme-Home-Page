@@ -1,0 +1,752 @@
+<!-- MOONHOLLOW APOTHECARY — MOBILE-FRIENDLY HAUNTED AUDIO (v6) -->
+
+<div id="mh-haunt-v4">
+  <button
+    id="mh-haunt-btn-v4"
+    type="button"
+    aria-label="Turn Halloween sounds on"
+    aria-pressed="false"
+    title="Awaken the spirits"
+  >
+    <span id="mh-haunt-icon-v4" aria-hidden="true">👻</span>
+    <span class="mh-haunt-dot-v4" aria-hidden="true"></span>
+  </button>
+
+  <div id="mh-haunt-tip-v4" role="status" aria-live="polite">
+    AWAKEN THE SPIRITS
+  </div>
+</div>
+
+<style>
+#mh-haunt-v4 {
+  position: fixed !important;
+  top: 50% !important;
+  right: 12px !important;
+  left: auto !important;
+  bottom: auto !important;
+  transform: translateY(-50%);
+  z-index: 999999 !important;
+  font-family: Georgia, serif;
+}
+
+#mh-haunt-v4,
+#mh-haunt-v4 * {
+  box-sizing: border-box;
+}
+
+#mh-haunt-v4 #mh-haunt-btn-v4 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid #9b6ac4;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, #48245e, #100719 75%);
+  color: #f1e8d6;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-shadow: 0 0 15px #9b6ac455, 0 3px 12px #0008;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+#mh-haunt-v4 #mh-haunt-btn-v4:hover {
+  border-color: #ff7a1a;
+  box-shadow: 0 0 22px #ff7a1a77;
+}
+
+#mh-haunt-v4 #mh-haunt-btn-v4:focus-visible {
+  outline: 2px solid #ffb16c;
+  outline-offset: 4px;
+}
+
+#mh-haunt-v4 #mh-haunt-btn-v4.mh-active-v4 {
+  border-color: #ff7a1a;
+  color: #ffc18e;
+  box-shadow: 0 0 19px #ff7a1a55, 0 3px 12px #0008;
+}
+
+#mh-haunt-v4 .mh-haunt-dot-v4 {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #100719;
+  border-radius: 50%;
+  background: #83758d;
+  pointer-events: none;
+}
+
+#mh-haunt-v4 #mh-haunt-btn-v4.mh-active-v4 .mh-haunt-dot-v4 {
+  background: #9be564;
+  box-shadow: 0 0 7px #9be564;
+}
+
+#mh-haunt-v4 #mh-haunt-tip-v4 {
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 56px;
+  transform: translateY(-50%) translateX(5px);
+  width: max-content;
+  max-width: min(220px, calc(100vw - 95px));
+  padding: 8px 10px;
+  border: 1px solid #4a2c6e;
+  border-radius: 4px;
+  background: #100719;
+  color: #f1e8d6;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  text-align: center;
+  overflow-wrap: anywhere;
+  box-shadow: 0 3px 12px #0008;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #mh-haunt-v4:hover #mh-haunt-tip-v4,
+  #mh-haunt-v4:focus-within #mh-haunt-tip-v4 {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+#mh-haunt-v4.mh-tip-visible-v4 #mh-haunt-tip-v4 {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 600px) {
+  #mh-haunt-v4 { right: 8px !important; }
+
+  #mh-haunt-v4 #mh-haunt-btn-v4 {
+    width: 44px;
+    height: 44px;
+    font-size: 21px;
+  }
+
+  #mh-haunt-v4 #mh-haunt-tip-v4 {
+    right: 52px;
+    max-width: min(200px, calc(100vw - 82px));
+    padding: 8px 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mh-haunt-v4 *,
+  #mh-haunt-v4 *::before,
+  #mh-haunt-v4 *::after {
+    transition: none !important;
+  }
+}
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  const root = document.getElementById('mh-haunt-v4');
+  if (!root || root.dataset.ready === '1') return;
+  root.dataset.ready = '1';
+
+  // Move to <body>: Elementor/theme wrappers with transform/overflow break
+  // position:fixed on mobile scroll.
+  if (root.parentNode !== document.body) document.body.appendChild(root);
+
+  const btn = root.querySelector('#mh-haunt-btn-v4');
+  const icon = root.querySelector('#mh-haunt-icon-v4');
+  const tip = root.querySelector('#mh-haunt-tip-v4');
+
+  const CONFIG = {
+    masterVolume: 0.36,
+    windVolume: 0.32,
+    droneVolume: 0.16,
+    windFilterFrequency: 500,
+    windLfoSpeed: 0.08,
+    windLfoDepth: 180,
+    droneFrequencies: [55, 82.4, 110],
+    droneLayerVolumes: [0.5, 0.18, 0.09],
+    bellVolumes: [0.15, 0.075, 0.041, 0.022],
+    bellIntervalMin: 5500,
+    bellIntervalMax: 8500,
+    ghostVolume: 0.072,
+    ghostBreathVolume: 0.040,
+    wolfVolume: 0.052,
+    owlVolume: 0.065,
+    doorVolume: 0.065,
+    effectIntervalMin: 5500,
+    effectIntervalMax: 9500,
+    firstGhostDelay: 600,
+    reverbVolume: 0.55,
+    reverbDuration: 2.2,
+    fadeInTime: 0.2,
+    fadeOutTime: 0.12,
+    shutdownDelay: 700,     // fade-out finishes, then the audio context is closed
+    noiseBufferDuration: 3,
+    tooltipDuration: 2200
+  };
+
+  let ctx = null, master = null, reverb = null, noiseBuffer = null;
+  let active = false, starting = false, built = false;
+  let timers = [], tooltipTimer = null, closeTimer = null;
+  let keepAlive = null;
+
+  const rand = (min, max) => min + Math.random() * (max - min);
+  const canPlay = () => active && ctx && master && ctx.state === 'running';
+
+  /* ---------- Tooltip ---------- */
+  function showTip() {
+    root.classList.add('mh-tip-visible-v4');
+    clearTimeout(tooltipTimer);
+    tooltipTimer = setTimeout(function () {
+      root.classList.remove('mh-tip-visible-v4');
+    }, CONFIG.tooltipDuration);
+  }
+
+  const setTipText = (m) => { tip.textContent = m; };
+
+  const notifyWindState = (isActive) =>
+    document.dispatchEvent(
+      new CustomEvent('mh:wind-audio-state', { detail: { active: isActive } })
+    );
+
+  /* ---------- Timers ---------- */
+  function later(fn, ms) {
+    const id = setTimeout(function () {
+      timers = timers.filter((t) => t !== id);
+      if (active) fn();
+    }, ms);
+    timers.push(id);
+  }
+
+  function clearTimers() {
+    timers.forEach(clearTimeout);
+    timers = [];
+  }
+
+  /* ---------- iOS / mobile audio session ---------- */
+  function silentWavUrl() {
+    const n = 8000, v = new DataView(new ArrayBuffer(44 + n));
+    const s = (o, t) => { for (let i = 0; i < t.length; i++) v.setUint8(o + i, t.charCodeAt(i)); };
+    s(0, 'RIFF'); v.setUint32(4, 36 + n, true); s(8, 'WAVEfmt ');
+    v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, 8000, true); v.setUint32(28, 8000, true);
+    v.setUint16(32, 1, true); v.setUint16(34, 8, true);
+    s(36, 'data'); v.setUint32(40, n, true);
+    for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+    return URL.createObjectURL(new Blob([v], { type: 'audio/wav' }));
+  }
+
+  function unlockSession() {
+    try {
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';
+    } catch (e) {}
+
+    try {
+      if (!keepAlive) {
+        keepAlive = new Audio(silentWavUrl());
+        keepAlive.loop = true;
+        keepAlive.setAttribute('playsinline', '');
+      }
+      const p = keepAlive.play();
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) {}
+  }
+
+  /* ---------- Context + graph ---------- */
+  function createContext() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) throw new Error('This browser does not support Web Audio.');
+
+    try { ctx = new AC({ latencyHint: 'playback' }); }
+    catch (e) { ctx = new AC(); }
+
+    built = false;
+
+    ctx.onstatechange = function () {
+      if (active && ctx && ctx.state !== 'running' && ctx.state !== 'closed') {
+        ctx.resume().catch(function () {});
+        setTimeout(function () {
+          if (active && ctx && ctx.state !== 'running') {
+            setTipText('TAP ANYWHERE TO RESUME');
+            showTip();
+          }
+        }, 600);
+      }
+    };
+  }
+
+  // Fully stops everything (wind, drone, any tail sounds) and frees CPU/battery.
+  function shutdown() {
+    clearTimeout(closeTimer);
+    closeTimer = null;
+    if (active) return;
+
+    const old = ctx;
+    ctx = null; master = null; reverb = null; noiseBuffer = null; built = false;
+
+    if (old) {
+      old.onstatechange = null;
+      if (old.state !== 'closed') old.close().catch(function () {});
+    }
+    if (keepAlive) keepAlive.pause();
+  }
+
+  function buildGraph() {
+    const compressor = ctx.createDynamicsCompressor();
+    compressor.threshold.value = -20;
+    compressor.knee.value = 16;
+    compressor.ratio.value = 5;
+    compressor.attack.value = 0.01;
+    compressor.release.value = 0.3;
+    compressor.connect(ctx.destination);
+
+    master = ctx.createGain();
+    master.gain.value = 0.0001;
+    master.connect(compressor);
+
+    const len = Math.floor(ctx.sampleRate * CONFIG.reverbDuration);
+    const impulse = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = impulse.getChannelData(c);
+      for (let i = 0; i < len; i++) {
+        const t = 1 - i / len;
+        d[i] = (Math.random() * 2 - 1) * t * t * t;
+      }
+    }
+
+    reverb = ctx.createConvolver();
+    reverb.buffer = impulse;
+    const reverbGain = ctx.createGain();
+    reverbGain.gain.value = CONFIG.reverbVolume;
+    reverb.connect(reverbGain);
+    reverbGain.connect(master);
+
+    const nLen = Math.floor(ctx.sampleRate * CONFIG.noiseBufferDuration);
+    noiseBuffer = ctx.createBuffer(1, nLen, ctx.sampleRate);
+    const nd = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < nLen; i++) nd[i] = Math.random() * 2 - 1;
+
+    // Wind
+    const wind = ctx.createBufferSource();
+    wind.buffer = noiseBuffer;
+    wind.loop = true;
+
+    const windFilter = ctx.createBiquadFilter();
+    windFilter.type = 'lowpass';
+    windFilter.frequency.value = CONFIG.windFilterFrequency;
+
+    const windGain = ctx.createGain();
+    windGain.gain.value = CONFIG.windVolume;
+
+    wind.connect(windFilter);
+    windFilter.connect(windGain);
+    windGain.connect(master);
+    wind.start();
+
+    const windLfo = ctx.createOscillator();
+    const windDepth = ctx.createGain();
+    windLfo.type = 'sine';
+    windLfo.frequency.value = CONFIG.windLfoSpeed;
+    windDepth.gain.value = CONFIG.windLfoDepth;
+    windLfo.connect(windDepth);
+    windDepth.connect(windFilter.frequency);
+    windLfo.start();
+
+    // Drone
+    const drone = ctx.createGain();
+    drone.gain.value = CONFIG.droneVolume;
+    drone.connect(master);
+
+    CONFIG.droneFrequencies.forEach(function (f, i) {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = i === 1 ? 'triangle' : 'sine';
+      osc.frequency.value = f;
+      g.gain.value = CONFIG.droneLayerVolumes[i];
+      osc.connect(g);
+      g.connect(drone);
+      osc.start();
+    });
+
+    built = true;
+  }
+
+  /* ---------- Sound helper ---------- */
+  function cleanup(src, nodes) {
+    src.onended = function () {
+      nodes.forEach(function (n) { try { n.disconnect(); } catch (e) {} });
+    };
+  }
+
+  /* ---------- Bell ---------- */
+  function bell() {
+    if (!canPlay()) return;
+
+    const now = ctx.currentTime;
+    const notes = [293.7, 349.2, 392, 440, 261.6];
+    const base = notes[Math.floor(Math.random() * notes.length)];
+
+    [
+      [1, CONFIG.bellVolumes[0], 4.2],
+      [2.01, CONFIG.bellVolumes[1], 3.5],
+      [2.76, CONFIG.bellVolumes[2], 2.8],
+      [4.08, CONFIG.bellVolumes[3], 2.1]
+    ].forEach(function (it) {
+      const ratio = it[0], peak = it[1], decay = it[2];
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(base * ratio, now);
+      osc.frequency.exponentialRampToValueAtTime(base * ratio * 0.993, now + decay);
+
+      filter.type = 'lowpass';
+      filter.frequency.value = 3500;
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(peak, now + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(master);
+      gain.connect(reverb);
+
+      osc.start(now);
+      osc.stop(now + decay + 0.05);
+      cleanup(osc, [osc, filter, gain]);
+    });
+  }
+
+  /* ---------- Ghost ---------- */
+  function ghostCall() {
+    if (!canPlay()) return;
+
+    const now = ctx.currentTime;
+    const fundamental = rand(135, 190);
+
+    [1, 1.48, 2.02].forEach(function (ratio, index) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc.type = index === 1 ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(fundamental * ratio, now);
+      osc.frequency.linearRampToValueAtTime(fundamental * ratio * rand(0.65, 0.8), now + 2.5);
+      osc.frequency.linearRampToValueAtTime(fundamental * ratio * 1.15, now + 4.8);
+
+      filter.type = 'lowpass';
+      filter.frequency.value = 700;
+
+      const peak = CONFIG.ghostVolume * (index === 0 ? 1 : 0.37);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(peak, now + 0.8);
+      gain.gain.setValueAtTime(peak, now + 2);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 5.2);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(master);
+      gain.connect(reverb);
+
+      osc.start(now);
+      osc.stop(now + 5.3);
+      cleanup(osc, [osc, filter, gain]);
+    });
+
+    const src = ctx.createBufferSource();
+    src.buffer = noiseBuffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 650;
+    filter.Q.value = 0.6;
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(CONFIG.ghostBreathVolume, now + 1.3);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.7);
+
+    src.connect(filter);
+    filter.connect(gain);
+    gain.connect(master);
+    gain.connect(reverb);
+
+    src.start(now);
+    src.stop(now + 4.8);
+    cleanup(src, [src, filter, gain]);
+  }
+
+  /* ---------- Wolf ---------- */
+  function wolfHowl() {
+    if (!canPlay()) return;
+
+    const now = ctx.currentTime;
+    const duration = 4.5;
+    const base = rand(240, 330);
+
+    [1, 1.5, 2].forEach(function (ratio, index) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc.type = index === 1 ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(base * ratio, now);
+      osc.frequency.linearRampToValueAtTime(base * ratio * 1.45, now + 1.5);
+      osc.frequency.linearRampToValueAtTime(base * ratio * 0.78, now + duration);
+
+      filter.type = 'lowpass';
+      filter.frequency.value = 1100;
+
+      const peak = CONFIG.wolfVolume * (index === 0 ? 1 : 0.32);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(peak, now + 0.6);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(master);
+      gain.connect(reverb);
+
+      osc.start(now);
+      osc.stop(now + duration + 0.05);
+      cleanup(osc, [osc, filter, gain]);
+    });
+  }
+
+  /* ---------- Owl ---------- */
+  function owlHoot() {
+    if (!canPlay()) return;
+
+    const now = ctx.currentTime;
+
+    [0, 0.65].forEach(function (offset, index) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(index ? 460 : 370, now + offset);
+      osc.frequency.linearRampToValueAtTime(index ? 410 : 325, now + offset + 0.6);
+
+      gain.gain.setValueAtTime(0.0001, now + offset);
+      gain.gain.exponentialRampToValueAtTime(CONFIG.owlVolume, now + offset + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.75);
+
+      osc.connect(gain);
+      gain.connect(master);
+      gain.connect(reverb);
+
+      osc.start(now + offset);
+      osc.stop(now + offset + 0.8);
+      cleanup(osc, [osc, gain]);
+    });
+  }
+
+  /* ---------- Door ---------- */
+  function creakingDoor() {
+    if (!canPlay()) return;
+
+    const now = ctx.currentTime;
+
+    const src = ctx.createBufferSource();
+    src.buffer = noiseBuffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.Q.value = 8;
+    filter.frequency.setValueAtTime(900, now);
+    filter.frequency.linearRampToValueAtTime(240, now + 2.8);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(CONFIG.doorVolume, now + 0.4);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 3);
+
+    src.connect(filter);
+    filter.connect(gain);
+    gain.connect(master);
+    gain.connect(reverb);
+
+    src.start(now);
+    src.stop(now + 3.1);
+    cleanup(src, [src, filter, gain]);
+
+    const metal = ctx.createOscillator();
+    const metalGain = ctx.createGain();
+
+    metal.type = 'sawtooth';
+    metal.frequency.setValueAtTime(155, now);
+    metal.frequency.linearRampToValueAtTime(75, now + 2.5);
+
+    metalGain.gain.setValueAtTime(0.0001, now);
+    metalGain.gain.exponentialRampToValueAtTime(CONFIG.doorVolume * 0.2, now + 0.3);
+    metalGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
+
+    metal.connect(metalGain);
+    metalGain.connect(master);
+    metalGain.connect(reverb);
+
+    metal.start(now);
+    metal.stop(now + 2.9);
+    cleanup(metal, [metal, metalGain]);
+  }
+
+  /* ---------- Schedulers ---------- */
+  function scheduleEffects() {
+    if (!active) return;
+    const effects = [ghostCall, wolfHowl, owlHoot, creakingDoor];
+    later(function () {
+      effects[Math.floor(Math.random() * effects.length)]();
+      scheduleEffects();
+    }, rand(CONFIG.effectIntervalMin, CONFIG.effectIntervalMax));
+  }
+
+  function scheduleBells() {
+    if (!active) return;
+    later(function () {
+      bell();
+      scheduleBells();
+    }, rand(CONFIG.bellIntervalMin, CONFIG.bellIntervalMax));
+  }
+
+  /* ---------- UI state ---------- */
+  function setAudioOnUI() {
+    btn.classList.add('mh-active-v4');
+    btn.setAttribute('aria-pressed', 'true');
+    btn.setAttribute('aria-label', 'Turn Halloween sounds off');
+    btn.title = 'Silence the spirits';
+    icon.textContent = '♫';
+    setTipText('SILENCE THE SPIRITS');
+    notifyWindState(true);
+  }
+
+  function setAudioOffUI() {
+    btn.classList.remove('mh-active-v4');
+    btn.setAttribute('aria-pressed', 'false');
+    btn.setAttribute('aria-label', 'Turn Halloween sounds on');
+    btn.title = 'Awaken the spirits';
+    icon.textContent = '👻';
+    setTipText('AWAKEN THE SPIRITS');
+    notifyWindState(false);
+  }
+
+  /* ---------- Turn on ---------- */
+  async function turnOn() {
+    if (active || starting) return;
+
+    starting = true;
+    setTipText('AWAKENING THE SPIRITS...');
+
+    try {
+      // Cancel a pending shutdown (quick off → on)
+      clearTimeout(closeTimer);
+      closeTimer = null;
+
+      unlockSession();
+
+      if (!ctx || ctx.state === 'closed') createContext();
+
+      const resumed = ctx.resume();   // inside the tap gesture
+      if (!built) buildGraph();
+      await resumed;
+
+      if (ctx.state !== 'running') {
+        setTipText('TAP AGAIN TO ENABLE SOUND');
+        showTip();
+        return;
+      }
+
+      active = true;
+
+      const t = ctx.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(Math.max(master.gain.value, 0.0001), t);
+      master.gain.setTargetAtTime(CONFIG.masterVolume, t, CONFIG.fadeInTime);
+
+      setAudioOnUI();
+      clearTimers();
+
+      later(bell, 150);
+      later(ghostCall, CONFIG.firstGhostDelay);
+      scheduleBells();
+      scheduleEffects();
+
+      showTip();
+
+    } catch (error) {
+      console.error('Moonhollow audio error:', error);
+      active = false;
+      setAudioOffUI();
+      setTipText('SOUND BLOCKED — TAP AGAIN OR CHECK BROWSER SETTINGS');
+      showTip();
+      closeTimer = setTimeout(shutdown, 0);
+    } finally {
+      starting = false;
+    }
+  }
+
+  /* ---------- Turn off ---------- */
+  function turnOff() {
+    active = false;
+    clearTimers();
+
+    if (ctx && master && ctx.state !== 'closed') {
+      const t = ctx.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(Math.max(master.gain.value, 0.0001), t);
+      master.gain.setTargetAtTime(0.0001, t, CONFIG.fadeOutTime);
+    }
+
+    setAudioOffUI();
+    showTip();
+
+    // After the fade, fully close the audio context so nothing keeps playing.
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(shutdown, CONFIG.shutdownDelay);
+  }
+
+  btn.addEventListener('click', function () {
+    showTip();
+    active ? turnOff() : turnOn();
+  });
+
+  /* ---------- Recovery (scroll / tab switch / interruptions) ---------- */
+  function recover() {
+    if (!active || !ctx || ctx.state === 'running' || ctx.state === 'closed') return;
+    ctx.resume().then(function () {
+      if (ctx && ctx.state === 'running') {
+        if (keepAlive && keepAlive.paused) keepAlive.play().catch(function () {});
+        setTipText('SILENCE THE SPIRITS');
+      }
+    }).catch(function () {});
+  }
+
+  ['touchend', 'pointerup', 'click', 'keydown'].forEach(function (type) {
+    document.addEventListener(type, recover, { passive: true, capture: true });
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') recover();
+  });
+
+  window.addEventListener('pageshow', recover);
+  window.addEventListener('focus', recover);
+})();
+</script>

@@ -1,0 +1,212 @@
+<!-- ============================================================
+  SECTION 1: HEADER + MENU  (Moonhollow Apothecary) � Halloween
+  Elementor-?: ???? HTML widget ??? ? ???? ??? ????? ?????
+  ?? class ??? "mh-" ???, ??? ????? CSS-?? ???? ????? ???
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+.mh-header{
+  /* ?? ???? ???? ????? */
+  --mh-night:#14091f; --mh-pumpkin:#ff7a1a; --mh-slime:#9be564;
+  --mh-bone:#f1e8d6; --mh-mist:#b9a9d1; --mh-line:#4a2c6e;
+  position:relative; z-index:999; width:100%;
+  background:linear-gradient(180deg,#241338 0%,#14091f 100%);
+  font-family:Spectral,Georgia,serif; font-size:18px; line-height:1.5;
+}
+.mh-header *,.mh-header *::before,.mh-header *::after{box-sizing:border-box}
+
+/* ????????? ???? (????? ?????? ??, ???? ???????? ???? ??) */
+.mh-deco{position:absolute;inset:0;overflow:hidden;pointer-events:none;
+  background-image:
+    radial-gradient(circle,rgba(255,244,214,.8) 0 1px,transparent 1.5px),
+    radial-gradient(circle,rgba(255,244,214,.55) 0 1px,transparent 1.5px),
+    radial-gradient(circle,rgba(255,244,214,.7) 0 1px,transparent 1.5px);
+  background-size:230px 70px,310px 90px,170px 60px;
+  background-position:20px 14px,120px 40px,70px 8px}
+.mh-web{position:absolute;left:0;top:0;width:96px;height:72px;opacity:.35}
+.mh-web path{fill:none;stroke:var(--mh-bone);stroke-width:1}
+.mh-bat{position:absolute;fill:#07030d;filter:drop-shadow(0 0 6px rgba(255,122,26,.55));
+  animation:mhBob 3.4s ease-in-out infinite}
+.mh-bat.b1{width:38px;height:19px;left:41%;top:8px}
+.mh-bat.b2{width:26px;height:13px;left:47%;top:34px;animation-delay:-1.4s;animation-duration:4.2s}
+.mh-bat.b3{width:30px;height:15px;right:21%;top:10px;animation-delay:-2.2s}
+@keyframes mhBob{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(5px) scaleY(.8)}}
+.mh-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--mh-pumpkin) 20%,var(--mh-slime) 50%,var(--mh-pumpkin) 80%,transparent);
+  box-shadow:0 0 14px rgba(255,122,26,.7)}
+
+.mh-bar{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  max-width:1120px;margin:0 auto;padding:14px 22px}
+.mh-brand{display:flex;align-items:center;gap:10px;font-family:'Pirata One',Georgia,serif;
+  font-size:30px;line-height:1.1;letter-spacing:.02em;text-decoration:none;color:var(--mh-pumpkin);
+  text-shadow:0 0 18px rgba(255,122,26,.5)}
+/* ????? ????? ??? ????? ? ??? ????? ???????? ???? ?????? ?????? */
+.mh-brand{position:relative;--w:290px}   /* --w = ????? ?????? ??????, ?????? ???? ??? ???? */
+.mh-lbat{position:absolute;top:0;left:0;pointer-events:none;animation-timing-function:linear;animation-iteration-count:infinite}
+.mh-lbat svg{display:block;width:100%;height:100%;fill:#07030d;transform-origin:50% 60%;
+  filter:drop-shadow(0 0 5px rgba(255,122,26,.7));animation:mhFlap .3s ease-in-out infinite alternate}
+.mh-lbat.top{animation-name:mhLaneTop}
+.mh-lbat.bot{animation-name:mhLaneBot}
+.mh-lbat.l1{width:26px;height:13px;animation-duration:9s;animation-delay:-1s}
+.mh-lbat.l2{width:22px;height:11px;animation-duration:11s;animation-delay:-6s}
+.mh-lbat.l3{width:20px;height:10px;animation-duration:13s;animation-delay:-8s}
+.mh-lbat.l4{width:24px;height:12px;animation-duration:10s;animation-delay:-3s}
+/* ????? ???: ????? ????? ??? ????? ??? ???? ????? ???? ???? */
+@keyframes mhLaneTop{
+  0%{transform:translate(0,-14px) scaleX(1)}
+  12%{transform:translate(calc(var(--w)*.12),-6px) scaleX(1)}
+  25%{transform:translate(calc(var(--w)*.25),-16px) scaleX(1)}
+  37%{transform:translate(calc(var(--w)*.37),-6px) scaleX(1)}
+  49%{transform:translate(var(--w),-14px) scaleX(1)}
+  50%{transform:translate(var(--w),-14px) scaleX(-1)}
+  62%{transform:translate(calc(var(--w)*.7),-6px) scaleX(-1)}
+  75%{transform:translate(calc(var(--w)*.45),-16px) scaleX(-1)}
+  88%{transform:translate(calc(var(--w)*.2),-6px) scaleX(-1)}
+  99%{transform:translate(0,-14px) scaleX(-1)}
+  100%{transform:translate(0,-14px) scaleX(1)}}
+/* ????? ???: ????? ??? ????? ???? */
+@keyframes mhLaneBot{
+  0%{transform:translate(var(--w),30px) scaleX(-1)}
+  12%{transform:translate(calc(var(--w)*.85),38px) scaleX(-1)}
+  25%{transform:translate(calc(var(--w)*.65),28px) scaleX(-1)}
+  37%{transform:translate(calc(var(--w)*.4),38px) scaleX(-1)}
+  49%{transform:translate(0,30px) scaleX(-1)}
+  50%{transform:translate(0,30px) scaleX(1)}
+  62%{transform:translate(calc(var(--w)*.2),38px) scaleX(1)}
+  75%{transform:translate(calc(var(--w)*.5),28px) scaleX(1)}
+  88%{transform:translate(calc(var(--w)*.8),38px) scaleX(1)}
+  99%{transform:translate(var(--w),30px) scaleX(1)}
+  100%{transform:translate(var(--w),30px) scaleX(-1)}}
+@keyframes mhFlap{from{transform:scaleY(1)}to{transform:scaleY(.55)}}
+.mh-pumpkin{width:38px;height:36px;flex:none;filter:drop-shadow(0 0 8px rgba(255,122,26,.7));
+  animation:mhGlow 2.8s ease-in-out infinite}
+@keyframes mhGlow{0%,100%{filter:drop-shadow(0 0 5px rgba(255,122,26,.5))}50%{filter:drop-shadow(0 0 13px rgba(255,160,40,.95))}}
+
+.mh-nav{display:flex;gap:26px}
+.mh-nav a{position:relative;text-decoration:none;color:var(--mh-mist);transition:color .15s;padding:4px 0}
+.mh-nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;
+  background:var(--mh-slime);transform:scaleX(0);transition:transform .2s}
+.mh-nav a:hover{color:var(--mh-bone)}.mh-nav a:hover::after{transform:scaleX(1)}
+
+.mh-toggle{display:none;background:rgba(20,9,31,.8);border:2px solid var(--mh-pumpkin);color:var(--mh-bone);
+  border-radius:10px;width:44px;height:40px;cursor:pointer;padding:0;font-size:22px;line-height:1}
+.mh-header a:focus-visible,.mh-header button:focus-visible{outline:3px solid var(--mh-slime);outline-offset:3px}
+
+/* ?????? / ???????? */
+@media(max-width:860px){
+  .mh-toggle{display:inline-block}
+  .mh-nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;
+    background:#14091f;border-bottom:3px solid var(--mh-pumpkin);padding:8px 22px 16px}
+  .mh-nav.mh-open{display:flex}
+  .mh-nav a{padding:12px 0;border-bottom:1px solid rgba(74,44,110,.5)}
+  .mh-nav a::after{display:none}
+  .mh-brand{font-size:25px}
+  .mh-brand{--w:235px}
+  .mh-lbat.l3,.mh-lbat.l4{display:none}
+  .mh-bat.b2{display:none}.mh-bat.b1{left:52%}
+}
+@media(prefers-reduced-motion:reduce){.mh-bat,.mh-pumpkin,.mh-lbat,.mh-lbat svg{animation:none}}
+/* Natural bat flight: curved swoops across the full header, layered over the menu. */
+.mh-deco{z-index:3}
+.mh-bar{z-index:2}
+.mh-header::after{z-index:4}
+.mh-lbat{display:none!important}
+.mh-bat{left:-70px;right:auto;top:0;will-change:transform;transform-origin:50% 50%;}
+.mh-bat path{transform-box:fill-box;transform-origin:50% 45%;animation:mhWingBeat .22s ease-in-out infinite alternate;}
+.mh-bat.b1{width:38px;height:19px;animation:mhBatArcOne 14s linear infinite;animation-delay:-5s}
+.mh-bat.b2{left:auto;right:-70px;width:28px;height:14px;animation:mhBatArcTwo 18s linear infinite;animation-delay:-11s}
+.mh-bat.b3{width:23px;height:12px;animation:mhBatArcThree 21s linear infinite;animation-delay:-16s}
+@keyframes mhWingBeat{from{transform:scaleY(1)}to{transform:scaleY(.58)}}
+@keyframes mhBatArcOne{
+  0%{transform:translate(-70px,14px) rotate(-8deg) scale(.78);opacity:0}
+  5%{opacity:.9}
+  18%{transform:translate(16vw,2px) rotate(7deg) scale(.9)}
+  32%{transform:translate(34vw,19px) rotate(-5deg) scale(1)}
+  46%{transform:translate(51vw,-5px) rotate(8deg) scale(.94)}
+  61%{transform:translate(68vw,15px) rotate(-9deg) scale(.84)}
+  77%{transform:translate(86vw,-1px) rotate(5deg) scale(.96);opacity:.95}
+  94%{opacity:.8}
+  100%{transform:translate(calc(100vw + 90px),13px) rotate(-7deg) scale(.78);opacity:0}
+}
+@keyframes mhBatArcTwo{
+  0%{transform:translate(70px,-8px) scaleX(-1) rotate(7deg) scale(.75);opacity:0}
+  6%{opacity:.85}
+  21%{transform:translate(-14vw,13px) scaleX(-1) rotate(-8deg) scale(.9)}
+  38%{transform:translate(-33vw,-4px) scaleX(-1) rotate(5deg) scale(1)}
+  54%{transform:translate(-52vw,20px) scaleX(-1) rotate(-7deg) scale(.88)}
+  72%{transform:translate(-74vw,1px) scaleX(-1) rotate(8deg) scale(.96)}
+  94%{opacity:.8}
+  100%{transform:translate(calc(-100vw - 90px),-10px) scaleX(-1) rotate(-6deg) scale(.76);opacity:0}
+}
+@keyframes mhBatArcThree{
+  0%{transform:translate(-70px,31px) rotate(9deg) scale(.7);opacity:0}
+  7%{opacity:.72}
+  24%{transform:translate(22vw,16px) rotate(-7deg) scale(.82)}
+  43%{transform:translate(45vw,34px) rotate(8deg) scale(.72)}
+  62%{transform:translate(67vw,12px) rotate(-6deg) scale(.88)}
+  82%{transform:translate(88vw,28px) rotate(7deg) scale(.78);opacity:.75}
+  100%{transform:translate(calc(100vw + 90px),17px) rotate(-8deg) scale(.68);opacity:0}
+}
+@media(max-width:860px){
+  .mh-bat.b1{top:4px}
+  .mh-bat.b2{display:block;top:48px}
+  .mh-bat.b3{display:block;top:29px}
+}
+@media(prefers-reduced-motion:reduce){
+  .mh-bat,.mh-bat path,.mh-lbat,.mh-lbat svg{animation:none!important}
+}</style>
+
+<header class="mh-header">
+  <div class="mh-deco" aria-hidden="true">
+    <svg class="mh-web" viewBox="0 0 96 72"><path d="M0 0H96M0 0L84 28M0 0L58 54M0 0L28 70M0 0V72"/><path d="M22 0Q18 14 0 18M44 0Q36 28 0 36M70 0Q56 42 0 54M92 4Q76 54 0 70"/></svg>
+    <svg class="mh-bat b1" viewBox="0 0 60 30"><path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z"/></svg>
+    <svg class="mh-bat b2" viewBox="0 0 60 30"><path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z"/></svg>
+    <svg class="mh-bat b3" viewBox="0 0 60 30"><path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z"/></svg>
+  </div>
+
+  <div class="mh-bar">
+    <a class="mh-brand" href="#top">
+      <svg class="mh-pumpkin" viewBox="0 0 48 44" aria-hidden="true">
+        <path d="M22 10c0-4 2-7 6-8l1 3c-2 1-3 2-3 5z" fill="#5a8f2b"/>
+        <ellipse cx="14" cy="26" rx="11" ry="15" fill="#e85d04"/><ellipse cx="34" cy="26" rx="11" ry="15" fill="#e85d04"/>
+        <ellipse cx="24" cy="26" rx="12" ry="16" fill="#ff7a1a"/>
+        <path d="M14 29l3-6 3 6zM28 29l3-6 3 6z" fill="#2a1200"/>
+        <path d="M15 33h18l-3 5-3-3-3 3-3-3-3 3z" fill="#2a1200"/>
+      </svg>
+      Black Label Pharma
+      <span class="mh-lbat top l1" aria-hidden="true"><svg viewBox="0 0 60 30"><path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z"/></svg></span>
+      <span class="mh-lbat bot l2" aria-hidden="true"><svg viewBox="0 0 60 30"><path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z"/></svg></span>
+      <span class="mh-lbat top l3" aria-hidden="true"><svg viewBox="0 0 60 30"><path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z"/></svg></span>
+      <span class="mh-lbat bot l4" aria-hidden="true"><svg viewBox="0 0 60 30"><path d="M30 6l4 6 10-8-2 10 14-6-8 10c-4 0-8 2-10 6l-4-4-4 4c-2-4-6-6-10-6L2 8l14 6-2-10 10 8z"/></svg></span>
+    </a>
+
+    <nav class="mh-nav" id="mhNav" aria-label="Main">
+      <!-- href-? ????? Elementor ??????? CSS ID ????, ?? ???? ????? ???? ??? -->
+      <a href="https://blacklabelpharma.com/sho.p/">All</a>
+      <a href="https://blacklabelpharma.com/product-category/adhd-pills/">ADHD</a>
+      <a href="https://blacklabelpharma.com/product-category/pain-relief/">Pain Relief</a>
+      <a href="https://blacklabelpharma.com/product-category/sleeping-pills/">Sleeping</a>
+      <a href="https://blacklabelpharma.com/product-category/sexual-pills/">Sexual</a>
+      <a href="https://blacklabelpharma.com/product-category/anxiety-pills/">Anxiety</a>
+    </nav>
+
+    <button class="mh-toggle" id="mhToggle" aria-expanded="false" aria-controls="mhNav" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+
+<script>
+(function(){
+  var t=document.getElementById('mhToggle'),n=document.getElementById('mhNav');
+  if(!t||!n)return;
+  t.addEventListener('click',function(){
+    var o=n.classList.toggle('mh-open');
+    t.setAttribute('aria-expanded',o);
+    t.innerHTML=o?'&#10005;':'&#9776;';
+  });
+  n.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){n.classList.remove('mh-open');t.setAttribute('aria-expanded','false');t.innerHTML='&#9776;'}
+  });
+})();
+</script>

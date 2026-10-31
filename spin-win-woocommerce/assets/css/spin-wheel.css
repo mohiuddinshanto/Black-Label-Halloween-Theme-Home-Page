@@ -1,0 +1,607 @@
+﻿/* Spin & Win WooCommerce Frontend & Modal Styles */
+
+/* 1. Floating Launcher Button on Store */
+.spin-win-floating-badge {
+    position: fixed;
+    z-index: 99999;
+    background: linear-gradient(135deg, #f59e0b 0%, #ec4899 50%, #4f46e5 100%);
+    color: #241338;
+    font-family: Spectral, Georgia, serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: spinWinPulse 2.5s infinite;
+}
+
+.spin-win-launcher-wheel-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+}
+
+.spin-win-wheel-svg {
+    display: block;
+    animation: spinWinRotateSlow 10s linear infinite;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+    transition: transform 0.3s ease;
+}
+
+.spin-win-floating-badge:hover .spin-win-wheel-svg {
+    animation: spinWinRotateSlow 1.5s linear infinite;
+}
+
+@keyframes spinWinRotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spinWinPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+/* 2. Modal Overlay */
+.spin-win-inline-mount { width:100%; min-width:0; }
+.spin-win-inline-modal {
+    width:100%; max-width:none; min-height:440px; border-radius:18px;
+    box-shadow:none; background:transparent; overflow:visible;
+}
+.spin-win-inline-modal .spin-win-wheel-column {
+    flex:0 0 48%; width:48%; min-height:440px; border-radius:18px 0 0 18px;
+}
+.spin-win-inline-modal .spin-win-form-column { flex:1; border-radius:0 18px 18px 0; }
+@media (max-width:768px) {
+    .spin-win-inline-modal { flex-direction:column; }
+    .spin-win-inline-modal .spin-win-wheel-column { flex:0 0 auto; width:100%; min-height:320px; border-radius:18px 18px 0 0; }
+    .spin-win-inline-modal .spin-win-form-column { border-radius:0 0 18px 18px; }
+}
+
+.spin-win-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 5, 19, 0.84);
+    backdrop-filter: blur(10px);
+    z-index: 9999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    font-family: Spectral, Georgia, serif;
+    animation: spinWinFadeIn 0.25s ease-out;
+}
+
+.spin-win-modal {
+    background: #f6efdf;
+    border-radius: 24px;
+    box-shadow: 0 28px 90px -20px rgba(0, 0, 0, 0.7);
+    max-width: 840px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .spin-win-modal {
+        flex-direction: column;
+        max-height: 92vh;
+        overflow-y: auto;
+    }
+}
+
+.spin-win-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #efe5d4;
+    border: none;
+    font-size: 20px;
+    color: #685b70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 30;
+}
+.spin-win-close-btn:hover { background: #efe5d4; color: #241338; }
+
+/* 3. Wheel Column */
+.spin-win-wheel-column {
+    background: radial-gradient(circle at 50% 42%, #492453 0%, #241338 56%, #100818 100%);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 390px;
+}
+
+@media (max-width: 768px) {
+    .spin-win-wheel-column { width: 100%; padding: 18px 10px; }
+}
+
+.spin-win-pointer {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+/* 4. Form Column */
+.spin-win-form-column {
+    padding: 36px 32px;
+    background: linear-gradient(145deg, #f6efdf, #ece0ca);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spin-win-tag-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    background: #e4efcf;
+    color: #432654;
+    margin-bottom: 10px;
+    align-self: flex-start;
+}
+
+.spin-win-title {
+    font-family: "Pirata One", Georgia, serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #241338;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+}
+
+.spin-win-desc {
+    font-size: 13px;
+    color: #685b70;
+    margin: 0 0 18px 0;
+    line-height: 1.5;
+}
+
+.spin-win-alert {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.spin-win-field {
+    margin-bottom: 12px;
+}
+
+.spin-win-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #35283c;
+    margin-bottom: 4px;
+}
+
+.spin-win-field input[type="text"],
+.spin-win-field input[type="email"],
+.spin-win-field input[type="number"] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #d5c7d8;
+    border-radius: 10px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+.spin-win-field input:focus {
+    outline: none;
+    border-color: #795099;
+    box-shadow: 0 0 0 2px rgba(121,80,153,0.16);
+}
+
+.spin-win-captcha-box {
+    background: #f8f2e7;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.spin-win-captcha-box label { margin: 0; }
+.spin-win-captcha-box input { width: 70px !important; text-align: center; }
+
+.spin-win-consent-row label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #685b70;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.spin-win-btn-primary {
+    width: 100%;
+    background: linear-gradient(110deg, #ff8a26, #ff6d1b);
+    color: #241338;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 20px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(255, 122, 26, 0.24);
+    margin-top: 6px;
+    text-align: center;
+}
+.spin-win-btn-primary:hover {
+    background: linear-gradient(110deg, #ffa044, #ff7a1a);
+}
+
+.spin-win-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e3d8e9;
+    border-top-color: #ff7a1a;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spinWinSpin 0.8s linear infinite;
+}
+
+.spin-win-coupon-box {
+    background: #f8f2e7;
+    border: 2px dashed #9a7ab0;
+    border-radius: 12px;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+}
+.spin-win-coupon-code {
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: 800;
+    color: #432654;
+    letter-spacing: 1px;
+}
+.spin-win-btn-copy {
+    background: #f6efdf;
+    border: 1px solid #d5c7d8;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.spin-win-btn-copy:hover { background: #efe5d4; }
+
+@keyframes spinWinFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spinWinSpin {
+    to { transform: rotate(360deg); }
+}
+
+
+/* Homepage icon only launcher */
+.spin-win-floating-badge {
+    position: fixed; z-index: 999999; width: var(--spin-launcher-size, 72px); height: var(--spin-launcher-size, 72px);
+    padding: 0; border-radius: 50%; border: 0; background: transparent; box-shadow: 0 5px 20px rgba(0,0,0,.22);
+    display: flex; align-items: center; justify-content: center; cursor: pointer; animation: none; transition: transform .2s ease;
+}
+.spin-win-floating-badge:hover { transform: scale(1.06); }
+.spin-win-pos-bottom_left { left: 20px; bottom: 20px; }
+.spin-win-pos-bottom_right { right: 20px; bottom: 20px; }
+.spin-win-pos-top_left { left: 20px; top: 20px; }
+.spin-win-pos-top_right { right: 20px; top: 20px; }
+.spin-win-floating-badge .spin-win-wheel-svg { width: 100%; height: 100%; animation: spinWinRotateSlow 10s linear infinite; filter: drop-shadow(0 2px 4px rgba(0,0,0,.18)); }
+.spin-win-floating-badge:focus-visible { outline: 3px solid #2563eb; outline-offset: 4px; }
+
+/* Keep the launcher clear of theme button styles while honoring each saved corner. */
+.spin-win-floating-badge {
+    top: auto !important;
+    right: auto !important;
+    bottom: 20px !important;
+    left: auto !important;
+    width: min(var(--spin-launcher-size, 72px), calc(100vw - 24px)) !important;
+    height: min(var(--spin-launcher-size, 72px), calc(100vw - 24px)) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    line-height: 0 !important;
+    overflow: visible !important;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.spin-win-pos-bottom_left { bottom: 20px !important; left: 20px !important; }
+.spin-win-pos-bottom_right { bottom: 20px !important; right: 20px !important; }
+.spin-win-pos-top_left { top: 20px !important; bottom: auto !important; left: 20px !important; }
+.spin-win-pos-top_right { top: 20px !important; bottom: auto !important; right: 20px !important; }
+body.admin-bar .spin-win-pos-top_left { top: 52px !important; }
+body.admin-bar .spin-win-pos-top_right { top: 52px !important; }
+.spin-win-floating-badge .spin-win-wheel-svg {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50%;
+}
+
+/* Scope modal controls so storefront theme button rules cannot move the close control. */
+#spin-win-modal-overlay { box-sizing: border-box; }
+#spin-win-modal-overlay .spin-win-modal {
+    width: min(920px, 100%);
+    max-width: 920px;
+    border-radius: 22px;
+    overflow: hidden;
+    isolation: isolate;
+}
+#spin-win-modal-overlay .spin-win-wheel-column {
+    flex: 0 0 44%;
+    width: auto;
+    min-width: 0;
+    padding: 34px 24px;
+    background: radial-gradient(circle at 50% 42%, #492453 0%, #241338 56%, #100818 100%);
+}
+#spin-win-modal-overlay #spin-win-canvas {
+    display: block;
+    width: min(100%, 360px);
+    height: auto;
+}
+#spin-win-modal-overlay .spin-win-form-column {
+    min-width: 0;
+    padding: 42px 38px;
+    background: linear-gradient(145deg, #f6efdf, #ece0ca);
+}
+#spin-win-modal-overlay .spin-win-close-btn {
+    position: absolute !important;
+    top: 14px !important;
+    right: 14px !important;
+    left: auto !important;
+    float: none !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: #f1f5f9 !important;
+    color: #334155 !important;
+    box-shadow: none !important;
+    font: 400 24px/1 sans-serif !important;
+    text-align: center !important;
+    z-index: 50;
+}
+#spin-win-modal-overlay .spin-win-close-btn:hover {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+@media (max-width: 768px) {
+    .spin-win-pos-bottom_left { bottom: max(12px, env(safe-area-inset-bottom)) !important; left: max(12px, env(safe-area-inset-left)) !important; }
+    .spin-win-pos-bottom_right { bottom: max(12px, env(safe-area-inset-bottom)) !important; right: max(12px, env(safe-area-inset-right)) !important; }
+    .spin-win-pos-top_left { top: max(12px, env(safe-area-inset-top)) !important; left: max(12px, env(safe-area-inset-left)) !important; }
+    .spin-win-pos-top_right { top: max(12px, env(safe-area-inset-top)) !important; right: max(12px, env(safe-area-inset-right)) !important; }
+    body.admin-bar .spin-win-pos-top_left,
+    body.admin-bar .spin-win-pos-top_right { top: max(58px, calc(46px + env(safe-area-inset-top))) !important; }
+    #spin-win-modal-overlay { padding: 12px; }
+    #spin-win-modal-overlay .spin-win-modal {
+        width: min(480px, 100%);
+        max-height: calc(100dvh - 24px);
+        overflow-y: auto;
+        border-radius: 20px;
+    }
+    #spin-win-modal-overlay .spin-win-wheel-column {
+        flex: none;
+        width: 100%;
+        padding: 36px 20px 22px;
+    }
+    #spin-win-modal-overlay #spin-win-canvas { width: min(72vw, 300px); }
+    #spin-win-modal-overlay .spin-win-form-column { padding: 26px 24px 28px; }
+    #spin-win-modal-overlay .spin-win-pointer { top: 8px; }
+}
+
+
+
+
+/* Moonhollow Apothecary theme: popup, inline wheel, form, and result states */
+.spin-win-modal,
+.spin-win-modal * { box-sizing: border-box; }
+.spin-win-modal { background: #f6efdf; border: 1px solid rgba(185,169,209,.24); }
+.spin-win-overlay { background: rgba(12,5,19,.84); backdrop-filter: blur(10px); }
+.spin-win-wheel-column,
+#spin-win-modal-overlay .spin-win-wheel-column { background: radial-gradient(circle at 50% 42%,#492453 0,#241338 56%,#100818 100%); }
+.spin-win-form-column,
+#spin-win-modal-overlay .spin-win-form-column { background: linear-gradient(145deg,#f6efdf,#ece0ca); }
+.spin-win-title,
+#spin-won-title { font-family: 'Pirata One',Georgia,serif !important; font-size: 29px !important; font-weight: 400 !important; line-height: 1.12 !important; color: #241338 !important; }
+.spin-win-desc { color: #685b70; }
+.spin-win-tag-badge { background: #e4efcf; color: #36531b; }
+.spin-win-field label { color: #35283c; }
+.spin-win-field input[type="text"],
+.spin-win-field input[type="email"],
+.spin-win-field input[type="number"] { min-height: 44px; border-color: #d5c7d8; border-radius: 10px; background: #fffdf8; color: #241338; }
+.spin-win-field input:focus { border-color: #795099; box-shadow: 0 0 0 3px rgba(121,80,153,.16); }
+.spin-win-btn-primary { min-height: 48px; border-radius: 999px; background: linear-gradient(110deg,#ff8a26,#ff6d1b); color: #241338; box-shadow: 0 8px 18px rgba(255,122,26,.24); transition: transform .18s ease,box-shadow .18s ease; }
+.spin-win-btn-primary:hover { transform: translateY(-2px); background: linear-gradient(110deg,#ffa044,#ff7a1a); box-shadow: 0 10px 22px rgba(255,122,26,.32); }
+.spin-win-coupon-box { border-color: #9a7ab0; background: #f8f2e7; }
+.spin-win-coupon-code { color: #432654; }
+.spin-win-btn-copy { border-color: #c9b7d1; color: #432654; }
+.spin-win-btn-copy:hover { background: #efe5d4; }
+.spin-win-close-btn { background: #f6efdf; color: #432654; box-shadow: 0 3px 12px rgba(20,9,31,.18); }
+.spin-win-close-btn:hover { background: #e9dcc5; color: #241338; }
+@media(max-width:768px) {
+  .spin-win-modal { border-radius: 20px; }
+  .spin-win-form-column { padding: 24px 20px; }
+  .spin-win-title,#spin-won-title { font-size: 26px !important; }
+}
+@media(prefers-reduced-motion:reduce) { .spin-win-btn-primary { transition: none; } }
+
+/* Compact, container-aware layout for the inline wheel embed */
+.spin-win-inline-mount { min-width: 0; width: 100%; container-type: inline-size; }
+.spin-win-inline-modal {
+    display: grid !important;
+    grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 0 !important;
+    height: auto;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #f6efdf;
+}
+.spin-win-inline-modal .spin-win-wheel-column,
+#spin-win-modal-overlay .spin-win-inline-modal .spin-win-wheel-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+    min-width: 0;
+    min-height: 0 !important;
+    padding: 24px 14px;
+    overflow: hidden;
+}
+.spin-win-inline-modal #spin-win-canvas,
+#spin-win-modal-overlay #spin-win-canvas {
+    display: block;
+    width: min(100%, 290px) !important;
+    height: auto !important;
+    max-width: 100%;
+    aspect-ratio: 1;
+}
+.spin-win-inline-modal .spin-win-form-column {
+    min-width: 0;
+    padding: clamp(18px, 2.5vw, 30px);
+    overflow-wrap: anywhere;
+}
+.spin-win-inline-modal .spin-win-title { font-size: clamp(22px, 2.1vw, 29px) !important; }
+.spin-win-inline-modal .spin-win-desc { font-size: 13px; margin-bottom: 12px; }
+.spin-win-inline-modal .spin-win-field { margin-bottom: 9px; }
+.spin-win-inline-modal .spin-win-field input[type="text"],
+.spin-win-inline-modal .spin-win-field input[type="email"],
+.spin-win-inline-modal .spin-win-field input[type="number"] { min-height: 42px; padding: 8px 11px; }
+.spin-win-inline-modal .spin-win-btn-primary { padding: 11px 16px; }
+
+@container (max-width: 620px) {
+    .spin-win-inline-modal { grid-template-columns: minmax(0, 1fr); }
+    .spin-win-inline-modal .spin-win-wheel-column { min-height: 0 !important; padding: 22px 12px 14px; }
+    .spin-win-inline-modal #spin-win-canvas { width: min(68cqw, 250px) !important; }
+    .spin-win-inline-modal .spin-win-form-column { padding: 20px; }
+}
+@media(max-width:768px) {
+    .spin-win-inline-modal { grid-template-columns: minmax(0, 1fr); }
+    .spin-win-inline-modal .spin-win-wheel-column { min-height: 0 !important; padding: 22px 12px 14px; }
+    .spin-win-inline-modal #spin-win-canvas { width: min(68vw, 250px) !important; }
+    .spin-win-inline-modal .spin-win-form-column { padding: 20px; }
+}
+@media(max-width:420px) {
+    .spin-win-inline-modal .spin-win-form-column { padding: 17px 15px; }
+    .spin-win-inline-modal .spin-win-tag-badge { font-size: 10px; }
+    .spin-win-inline-modal .spin-win-title { font-size: 23px !important; }
+}
+
+/* Final sizing and color balance for the inline widget */
+.spin-win-inline-modal { grid-template-columns: minmax(0,1.12fr) minmax(0,.88fr); }
+.spin-win-inline-modal .spin-win-form-column { padding: 20px 18px; background: linear-gradient(150deg,#2b1739,#1b1028); }
+.spin-win-inline-modal .spin-win-title { color: #ff9a43 !important; font-size: 25px !important; }
+.spin-win-inline-modal .spin-win-desc { color: #d9cbe2; font-size: 12px; line-height: 1.45; margin-bottom: 10px; }
+.spin-win-inline-modal .spin-win-field label { color: #f1e8d6; font-size: 12px; }
+.spin-win-inline-modal .spin-win-field { margin-bottom: 8px; }
+.spin-win-inline-modal .spin-win-field input[type="text"],
+.spin-win-inline-modal .spin-win-field input[type="email"],
+.spin-win-inline-modal .spin-win-field input[type="number"] { min-height: 40px; padding: 7px 10px; border-color: #604675; background: #14091f; color: #f1e8d6; }
+.spin-win-inline-modal .spin-win-consent-row label { color: #cbbbd7; font-size: 10px; }
+.spin-win-inline-modal .spin-win-tag-badge { background: rgba(155,229,100,.14); color: #b8ed82; }
+.spin-win-inline-modal .spin-win-coupon-box { background: #14091f; border-color: #9a7ab0; }
+.spin-win-inline-modal .spin-win-coupon-code { color: #b8ed82; }
+.spin-win-inline-modal .spin-win-btn-copy { background: #2b1739; border-color: #604675; color: #f1e8d6; }
+.spin-win-inline-modal #spin-win-canvas { width: min(100%,420px) !important; height: auto !important; }
+@container (max-width:620px) {
+  .spin-win-inline-modal { grid-template-columns: minmax(0,1fr); }
+  .spin-win-inline-modal #spin-win-canvas { width: min(88cqw,400px) !important; }
+}
+@media(max-width:768px) {
+  .spin-win-inline-modal { grid-template-columns: minmax(0,1fr); }
+  .spin-win-inline-modal #spin-win-canvas { width: min(88vw,400px) !important; }
+}
+#spin-win-result-message { color: #d9cbe2 !important; line-height: 1.5; }
+
+/* Halloween reward message and coupon layout. */
+#spin-win-view-result .spin-win-result-intro,
+#spin-win-view-result .spin-win-result-outro {
+    margin: 0 auto 7px;
+    color: #e3d8e9;
+    font: 600 15px/1.45 Spectral, Georgia, serif;
+}
+#spin-win-view-result .spin-win-win-tag {
+    display: block;
+    margin: 0 0 7px;
+    color: #ff9a43;
+    font: 400 clamp(22px, 3.2vw, 42px)/1.08 'Pirata One', Georgia, serif;
+    letter-spacing: .02em;
+    white-space: nowrap;
+}
+#spin-win-view-result .spin-win-result-outro { margin-bottom: 12px; }
+#spin-win-view-result #spin-won-title {
+    color: #b8ed82 !important;
+    font: 400 clamp(27px, 3vw, 36px)/1.15 'Pirata One', Georgia, serif !important;
+}
+.spin-win-coupon-box {
+    gap: 10px;
+    min-width: 0;
+}
+.spin-win-coupon-box > div { flex: 1 1 auto; min-width: 0; }
+.spin-win-coupon-code { overflow-wrap: anywhere; }
+.spin-win-coupon-box .spin-win-btn-copy {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-width: max-content;
+    min-height: 40px;
+    margin: 0;
+    padding: 8px 14px;
+    white-space: nowrap;
+    line-height: 1.1;
+}
+
+/* Halloween finish for the embedded wheel. */
+.spin-win-inline-modal .spin-win-wheel-column {
+    background:
+        radial-gradient(circle at 50% 45%, rgba(255,122,26,.18), transparent 42%),
+        radial-gradient(circle at 50% 42%, #492453 0, #241338 56%, #100818 100%) !important;
+}
+.spin-win-inline-modal #spin-win-canvas {
+    filter: drop-shadow(0 0 14px rgba(255,122,26,.2));
+}
+.spin-win-inline-modal .spin-win-pointer svg path {
+    fill: #ff7a1a;
+    stroke: #f1e8d6;
+}
+.spin-win-inline-modal .spin-win-pointer svg circle { fill: #241338; }
